@@ -1,10 +1,10 @@
-R   1500 500
+R   1500 1000
 WE  ./sma9lo/file
 NO  ./taha    
 EA  ./lmeki   
 SO  ./saleh   
 S   ./etazi    
-F   10,10,12
+F   10,10,20
 C   10,10,20
 
 

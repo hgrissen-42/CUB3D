@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2020/12/30 15:54:46 by hgrissen         ###   ########.fr       */
+/*   Updated: 2020/12/30 18:35:38 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void get_path(char* line, int c);
 void path_rout(char* s, int c);
 
 void        print_errs();
+void	Check_prm();
 
 int         white_space(char *line);
 

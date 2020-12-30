@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgrissen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 01:38:01 by hgrissen          #+#    #+#             */
-/*   Updated: 2019/11/06 13:12:37 by hgrissen         ###   ########.fr       */
+/*   Updated: 2020/12/29 11:17:17 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,6 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 void				*ft_calloc(size_t count, size_t size);
+int					ft_numlen(int n, int minus);
+int					ft_isspace(int c);
 #endif

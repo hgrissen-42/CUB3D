@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgrissen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 18:40:28 by hgrissen          #+#    #+#             */
-/*   Updated: 2019/10/31 20:37:45 by hgrissen         ###   ########.fr       */
+/*   Updated: 2020/12/29 10:48:55 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char		*ft_strnew(size_t size)
 	return ((char *)malloc(sizeof(char) * (size + 1)));
 }
 
-static int		ft_numlen(int n, int minus)
+int		ft_numlen(int n, int minus)
 {
 	int numlen;
 

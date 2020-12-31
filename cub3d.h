@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2020/12/30 18:35:38 by hgrissen         ###   ########.fr       */
+/*   Updated: 2020/12/31 17:21:36 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,28 @@ void        prm_init();
 void        err_init(void);
 
 void        treat_file(char*    line);
+void        get_map(char* line);
+void        routing(char* line);
 void        get_res(char* line);
 void        get_rgb(char* line ,int f);
 int         prm_count(int num, int cnt, int f);
-void get_path(char* line, int c);
-void path_rout(char* s, int c);
+void        get_path(char* line, int c);
+void        path_rout(char* s, int c);
 
 void        print_errs();
-void	Check_prm();
+int         ch_err();
+int         rgb_err();
+int         res_err();
+int         pat_err();
+int         res_out();
+int         rgb_out();
+void        Ch_fil_err();
 
 int         white_space(char *line);
 
 
 
-
+//debugging
 void print_struct_elemts();
 
 typedef struct	s_prms {

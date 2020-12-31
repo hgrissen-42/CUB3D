@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:42 by hgrissen          #+#    #+#             */
-/*   Updated: 2020/12/30 19:00:57 by hgrissen         ###   ########.fr       */
+/*   Updated: 2020/12/31 19:01:02 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main()
     err_init();
     get_file();
     //print_struct_elemts();
-    print_errs();
+    Ch_fil_err();
     return 0;
 }
 
@@ -49,14 +49,9 @@ void    treat_file(char*    line)
         g_prm.inc++;
     }
     else if (c == 'W'|| c == 'E' || c == 'N' || c == 'S')
-    {
-        if(c == 'S')
-            line[1] == 'O' ? get_path(++line, 'O') : get_path(line, 'S');
-        else
-            get_path(++line, c);
-    }
-    else if (line[0] && g_prm.inc <= 8)
-        printf("%s\n", line);
-    else
-        printf("shi 7aja wierd");
+        routing(line);
+    else if (line[0] && g_prm.inc == 8)
+        get_map(line);
+    else if (line[0])
+        g_err.elm_inv = 1;
 }

@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.c                                          :+:      :+:    :+:   */
+/*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 17:39:28 by hgrissen          #+#    #+#             */
-/*   Updated: 2020/12/31 18:23:56 by hgrissen         ###   ########.fr       */
+/*   Created: 2020/12/31 15:21:32 by hgrissen          #+#    #+#             */
+/*   Updated: 2020/12/31 16:01:16 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int white_space(char *line)
+void get_map(char* line)
 {
-    int i;
-
-    i = 0;
-    while (ft_isspace(line[i]))
-		    i++;
-    return (i);
+    line = NULL;
 }

@@ -6,11 +6,28 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:40:51 by hgrissen          #+#    #+#             */
-/*   Updated: 2020/12/30 15:48:31 by hgrissen         ###   ########.fr       */
+/*   Updated: 2020/12/31 18:09:59 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void routing(char* line)
+{
+    int c;
+
+    c = line[0];
+    if (line[0] == 'N' && line[1] == 'O')
+        get_path(++line, c);
+    else if (line[0] == 'W' && line[1] == 'E')
+        get_path(++line, c);
+    else if (line[0] == 'E' && line[1] == 'A')
+        get_path(++line, c);
+    else if(line[0] == 'S')
+            line[1] == 'O' ? get_path(++line, 'O') : get_path(line, 'S');
+    else
+        g_err.elm_inv = 1;
+}
 
 void get_path(char* line, int c)
 {

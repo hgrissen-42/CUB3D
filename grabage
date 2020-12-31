@@ -1,0 +1,11 @@
+        if(c == 'S')
+            line[1] == 'O' ? get_path(++line, 'O') : get_path(line, 'S');
+        else
+            get_path(++line, c);
+
+
+
+
+
+
+            "Error\n"

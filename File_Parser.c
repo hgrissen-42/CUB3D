@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:42 by hgrissen          #+#    #+#             */
-/*   Updated: 2020/12/31 19:01:02 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/01 15:51:56 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void    treat_file(char*    line)
     }
     else if (c == 'W'|| c == 'E' || c == 'N' || c == 'S')
         routing(line);
-    else if (line[0] && g_prm.inc == 8)
+    else if (!line[0] && g_err.map_bgn)
+        g_err.inv_nwl = 1;
+    else
         get_map(line);
-    else if (line[0])
-        g_err.elm_inv = 1;
 }

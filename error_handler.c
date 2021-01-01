@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:26:20 by hgrissen          #+#    #+#             */
-/*   Updated: 2020/12/31 18:48:35 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/01 15:47:59 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	Ch_fil_err()
 		exit (0);
 	}
 }
+
 void	print_errs()
 {
 	if (g_err.elm_inv)
@@ -32,14 +33,13 @@ void	print_errs()
 		printf("wash maghadish t9ad number dlparameters ");
 	else if (g_prm.inc > 8)
 		printf("kayn 3andk double inclusion fl file ");
+	else if (g_err.map_inv || g_err.inv_nwl
+	|| g_err.plr_cnt > 1 || g_err.plr_cnt < 1)
+		map_err();
 	else
 	{
 		if (res_out() && !g_err.num_prm && !g_err.elm_inv)
-		{
 			printf("resolution 3andk mahiyash\n");
-			printf("width must be between 100 and 2560\n");
-			printf("height must be between 100 and 1440\n");
-		}
 		else if (rgb_out())
 			printf("shi color 3andk out of range ");
 	}
@@ -49,10 +49,22 @@ int		ch_err()
 {
 	if (g_err.dbl_inc || g_err.elm_inv ||
 	g_err.num_prm || g_prm.inc > 8 || res_err() || rgb_err()
-	|| pat_err() || res_out() || rgb_out())
+	|| pat_err() || res_out() || rgb_out() || g_err.map_inv
+	|| g_err.inv_nwl || g_err.plr_cnt > 1 || g_err.plr_cnt < 1)
 		return (1);
 	else
 		return (0);
 }
 
+void	map_err()
+{
+	if (g_err.map_inv)
+        printf("lghalat a3shiri\n");
+    else if(g_err.inv_nwl)
+        printf("new line a3shiri\n");
+    else if(g_err.plr_cnt > 1)
+        printf("3Andk shela players\n");
+    else if(g_err.plr_cnt < 1)
+        printf("lplayer fkaghk?! \n");
+}
 

@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2020/12/31 17:21:36 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/01 15:34:42 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int         prm_count(int num, int cnt, int f);
 void        get_path(char* line, int c);
 void        path_rout(char* s, int c);
 
+int         is_map(int c);
+int         is_player(int c);
+
 void        print_errs();
 int         ch_err();
 int         rgb_err();
@@ -43,6 +46,7 @@ int         pat_err();
 int         res_out();
 int         rgb_out();
 void        Ch_fil_err();
+void        map_err();
 
 int         white_space(char *line);
 
@@ -74,6 +78,10 @@ typedef struct	s_errs {
     int         num_prm;
     int         dbl_inc;
     int         elm_inv;
+    int         plr_cnt;
+    int         map_bgn;
+    int         inv_nwl;
+    int         map_inv;
 }				t_err;
 t_err g_err;
 

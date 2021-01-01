@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:24:52 by hgrissen          #+#    #+#             */
-/*   Updated: 2020/12/30 15:26:44 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/01 15:13:25 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,8 @@ void    err_init()
     g_err.num_prm   = 0;
     g_err.dbl_inc   = 0;
     g_err.elm_inv   = 0;
+    g_err.plr_cnt   = 0;
+    g_err.map_bgn   = 0;
+    g_err.inv_nwl   = 0;
+    g_err.map_inv   = 0;
 }

@@ -39,7 +39,6 @@ int         is_map(int c);
 int         is_player(int c);
 int         is_notspace(int c);
 void        addline(char* line);
-void        end_str();
 
 void        print_errs();
 int         ch_err();
@@ -74,6 +73,7 @@ typedef struct	s_prms {
     char		*ea;
     char		*s;
     char        *str;
+    char        **map;
 
 }				t_prm;
 t_prm g_prm;

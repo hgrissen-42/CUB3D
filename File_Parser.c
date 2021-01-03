@@ -20,7 +20,6 @@ int main()
     get_file();
     //print_struct_elemts();
     Ch_fil_err();
-    printf("%s", g_prm.str);
     return 0;
 }
 

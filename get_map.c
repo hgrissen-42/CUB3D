@@ -40,20 +40,10 @@ void get_map(char* line)
 
 void addline(char *line)
 {
+    char nwl = '\n';
     if (!g_prm.str)
         g_prm.str = ft_strdup(line);
     else
         g_prm.str = ft_strjoin(g_prm.str, line);
-    end_str();
-}
-
-void end_str()
-{
-    int i;
-
-    i = 0;
-    while (g_prm.str[i])
-        i++;
-    g_prm.str[i++] = '\n';
-    g_prm.str[i] = '\0';
+    g_prm.str = ft_strjoin(g_prm.str, &nwl);
 }

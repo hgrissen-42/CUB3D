@@ -9,3 +9,209 @@
 
 
             "Error\n"
+
+
+
+
+
+
+
+
+
+
+
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   File_Parser.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/29 14:19:42 by hgrissen          #+#    #+#             */
+/*   Updated: 2021/01/01 15:51:56 by hgrissen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+void spc_fil();
+void map_fil();
+char **g_prm.map;
+int gcount;
+int main()
+{   
+    
+    //printf("%d\n", gcount);
+    //prm_init();
+    //err_init();
+    get_file();
+    nwl_cnt();
+    real();
+    spc_fil();
+    map_fil();
+    //printf("%d", lng_lin());
+    //print_struct_elemts();
+    //Ch_fil_err();
+    return 0;
+}
+
+void   get_file()
+{
+    int     fd;
+    char*   line;
+    char    nwl = '\n';
+    char    eof =  '\0';
+
+    fd = open("map.cub", O_RDONLY);
+    while(get_next_line(fd, &line))
+    {
+        if (!g_prm.str)
+            g_prm.str = line;
+        else
+            g_prm.str = ft_strjoin(g_prm.str , line);
+        g_prm.str = ft_strjoin(g_prm.str, &nwl);
+        g_prm.str = ft_strjoin(g_prm.str, &eof);
+        //treat_file(line);
+    }
+    g_prm.str = ft_strjoin(g_prm.str , line);
+    g_prm.str = ft_strjoin(g_prm.str,&nwl);
+    g_prm.str = ft_strjoin(g_prm.str, &eof);
+    //treat_file(line);
+}
+
+void    treat_file(char*    line)
+{
+    char c;
+
+    c = line[0];
+    if (c == 'R')
+        get_res(line);
+    else if (c == 'F' || c == 'C')
+    {
+        c == 'F' ? get_rgb(line, 'F') : get_rgb(line, 'C');
+        g_prm.inc++;
+    }
+    else if (c == 'W'|| c == 'E' || c == 'N' || c == 'S')
+        routing(line);
+    else if (!line[0] && g_err.map_bgn)
+        g_err.inv_nwl = 1;
+    else
+        get_map(line);
+}
+
+
+
+void nwl_cnt()
+{
+    int i   = 0;
+    int cnt = 0;
+    while(g_prm.str[i])
+    {
+        //printf("%d\n", i);
+        if(g_prm.str[i] == '\n')
+            cnt++;
+        i++;
+    }
+    gcount = cnt;
+}
+
+int lng_lin()
+{
+    int i   = 0;
+    int j = 0;
+    int tmp = 0;
+    int haha[gcount];
+
+    while(g_prm.str[i])
+    {
+        tmp++;
+        if(g_prm.str[i] == '\n')
+        {
+            haha[j] = tmp -1;
+            tmp = 0;
+            j++;
+        }   
+        i++;
+    }
+    tmp = 0;
+    j--;
+    while(j >= 0)
+    {
+        if (tmp < haha[j])
+            tmp = haha[j];
+        j--;
+    }
+    return(tmp);
+}
+
+void real()
+{
+    int  i = 0;
+    //printf("%d" , nwl_cnt());
+    g_prm.map = malloc(sizeof(char *) * (gcount + 2));
+    while(i <= gcount + 1)
+    {
+        g_prm.map[i] = malloc(sizeof(char) * (lng_lin() + 2));
+        //g_prm.map[i] = "h\0";
+        i++;
+    }
+}
+
+void spc_fil()
+{
+    int i = 0;
+    int j = 0;
+    while(i <= gcount + 1)
+    {
+        j = 0;
+        while(j <= lng_lin() + 1)
+        {
+            g_prm.map[i][j] = ' ';
+            j++;
+        }
+        g_prm.map[i][j] = '\0';
+        i++;
+    }
+}
+
+void map_fil()
+{
+    int i = 1;
+    int j = 1;
+    int k = 0;
+    int chk = 0;
+    while(i <= gcount)
+    {
+        j = 1;
+        //k = 0;
+        chk = 0;
+        while(j <= lng_lin())
+        {
+            if (g_prm.str[k] == '\n')
+            {
+                k++;
+                chk = 1;
+            }
+            else
+            {
+                if(!chk)
+                {
+                    g_prm.map[i][j++] = g_prm.str[k];
+                    k++;
+                }
+                else
+                    g_prm.map[i][j++] = ' ';
+                }
+        }
+        i++;
+    }
+
+    i = 0;
+    while(i <= gcount + 1)
+    {
+        //printf("%s", g_prm.map[i]);
+        i++;
+    }
+    printf("%s", g_prm.str);
+}

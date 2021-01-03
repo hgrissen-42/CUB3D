@@ -29,6 +29,7 @@ void    prm_init()
     g_prm.ea    = NULL;
     g_prm.s     = NULL;
     g_prm.str   = NULL;
+    g_prm.map   = NULL;
 }
 
 void    err_init()

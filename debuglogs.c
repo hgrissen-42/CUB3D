@@ -14,9 +14,9 @@
 
 void print_struct_elemts()
 {
-	printf("\nfloor r : %d g : %d b : %d\n" ,g_prm.fr ,g_prm.fg ,g_prm.fb);
-    printf("\nceiling r : %d g : %d b : %d\n" ,g_prm.cr ,g_prm.cg ,g_prm.cb);
-    printf("\nWidth : %d  Height : %d\n"  ,g_prm.w  ,g_prm.h);
-    printf("\nNo %s\nSo %s\nEa %s\nWe %s\nSprite %s\n",g_prm.no ,g_prm.so ,g_prm.ea ,g_prm.we, g_prm.s);
-	
+	printf("\nfloor   rgb : %d,%d,%d\n" ,g_prm.fr ,g_prm.fg ,g_prm.fb);
+    printf("\nceiling rgb : %d,%d,%d\n" ,g_prm.cr ,g_prm.cg ,g_prm.cb);
+    printf("\nWid and Hei : %d %d\n"  ,g_prm.w  ,g_prm.h);
+    printf("\nNo %s\nSo %s\nEa %s\nWe %s\nSp %s\n",g_prm.no ,g_prm.so ,g_prm.ea ,g_prm.we, g_prm.s);
+	printf("\nmap :\n\n%s", g_prm.str);
 }

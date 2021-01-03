@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:26:20 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/01 15:47:59 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/01 18:07:01 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_errs()
 		printf("wash maghadish t9ad number dlparameters ");
 	else if (g_prm.inc > 8)
 		printf("kayn 3andk double inclusion fl file ");
-	else if (g_err.map_inv || g_err.inv_nwl
+	else if (g_err.map_inv || g_err.inv_nwl || g_err.map_spc
 	|| g_err.plr_cnt > 1 || g_err.plr_cnt < 1)
 		map_err();
 	else
@@ -50,7 +50,8 @@ int		ch_err()
 	if (g_err.dbl_inc || g_err.elm_inv ||
 	g_err.num_prm || g_prm.inc > 8 || res_err() || rgb_err()
 	|| pat_err() || res_out() || rgb_out() || g_err.map_inv
-	|| g_err.inv_nwl || g_err.plr_cnt > 1 || g_err.plr_cnt < 1)
+	|| g_err.inv_nwl || g_err.plr_cnt > 1 || g_err.plr_cnt < 1
+	|| g_err.map_spc)
 		return (1);
 	else
 		return (0);
@@ -66,5 +67,7 @@ void	map_err()
         printf("3Andk shela players\n");
     else if(g_err.plr_cnt < 1)
         printf("lplayer fkaghk?! \n");
+	else if (g_err.map_spc)
+		printf("ster koulu ghir space,WTF?! \n");
 }
 

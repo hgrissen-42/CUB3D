@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:42 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/01 15:51:56 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/01 17:45:52 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main()
     get_file();
     //print_struct_elemts();
     Ch_fil_err();
+    printf("%s", g_prm.str);
     return 0;
 }
 

@@ -19,6 +19,11 @@ int main()
     err_init();
     get_file();
     //print_struct_elemts();
+    if (g_err.map_bgn)
+    { 
+        build_map();
+        map_chk_opn();
+    }
     Ch_fil_err();
     return 0;
 }

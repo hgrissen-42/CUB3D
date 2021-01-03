@@ -37,8 +37,14 @@ void        path_rout(char* s, int c);
 
 int         is_map(int c);
 int         is_player(int c);
+int         is_srndbl(int c);
 int         is_notspace(int c);
 void        addline(char* line);
+void        lng_lin();
+void        nwl_cnt();
+void        map_fil();
+void        spc_fil();
+void        build_map();
 
 void        print_errs();
 int         ch_err();
@@ -49,6 +55,7 @@ int         res_out();
 int         rgb_out();
 void        Ch_fil_err();
 void        map_err();
+void        map_chk_opn();
 
 int         white_space(char *line);
 
@@ -74,6 +81,8 @@ typedef struct	s_prms {
     char		*s;
     char        *str;
     char        **map;
+    int         nwlcnt;
+    int         lnglin;
 
 }				t_prm;
 t_prm g_prm;
@@ -87,6 +96,7 @@ typedef struct	s_errs {
     int         inv_nwl;
     int         map_inv;
     int         map_spc;
+    int         map_open;
 }				t_err;
 t_err g_err;
 

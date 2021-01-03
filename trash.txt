@@ -47,7 +47,7 @@ int main()
     //err_init();
     get_file();
     nwl_cnt();
-    real();
+    build_map();
     spc_fil();
     map_fil();
     //printf("%d", lng_lin());
@@ -145,7 +145,7 @@ int lng_lin()
     return(tmp);
 }
 
-void real()
+void build_map()
 {
     int  i = 0;
     //printf("%d" , nwl_cnt());

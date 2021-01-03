@@ -30,6 +30,8 @@ void    prm_init()
     g_prm.s     = NULL;
     g_prm.str   = NULL;
     g_prm.map   = NULL;
+    g_prm.nwlcnt = 0;
+    g_prm.lnglin = 0;
 }
 
 void    err_init()
@@ -42,4 +44,5 @@ void    err_init()
     g_err.inv_nwl   = 0;
     g_err.map_inv   = 0;
     g_err.map_spc   = 0;
+    g_err.map_open  = 0;
 }

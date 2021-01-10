@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:42 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/10 16:47:59 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/10 17:04:59 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main()
     prm_init();
     err_init();
     get_file();
-    //print_struct_elemts();
+    print_struct_elemts();
 
     if (g_err.map_bgn)
     { 

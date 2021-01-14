@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/01 18:20:49 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:20:01 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include<sys/stat.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <mlx.h>
 #include "GNL/get_next_line.h"
 #include "LIBFT/libft.h"
 

@@ -10,23 +10,46 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = *.c
+#SRC = *.c
 
-OBJECT = *.o
+#OBJECT = *.o
 
-NAME = cub3d.a
+#NAME = cub3d.a
 
-all : $(NAME)
+#all : $(NAME)
 
-$(NAME) :
-	@gcc -Wall -Wextra -Werror  $(SRC)
-	@ar rc $(NAME) $(OBJECT)
-	@ranlib $(NAME)
+#$(NAME) :
+#	@gcc -Wall -Wextra -Werror  $(SRC)
+#	@ar rc $(NAME) $(OBJECT)
+#	@ranlib $(NAME)
 
-clean : 
-	@rm -rf *.o
+#clean : 
+#	@rm -rf *.o
 
-fclean : clean
-	@rm -rf $(NAME)
+#fclean : clean
+#	@rm -rf $(NAME)
 
-re : fclean all
+#re : fclean all
+
+INC=%%%%
+
+INCLIB=$(INC)/../lib
+
+CC=gcc
+
+CFLAGS= -I$(INC) -O3 -I..
+
+NAME= cub3D
+SRC = test.c
+OBJ = $(SRC:.c=.o)
+
+all     :$(NAME)
+
+$(NAME) :$(OBJ)
+		$(CC) -o $(NAME) $(OBJ) -L.. -lmlx -L$(INCLIB)-lX -lXext 11 -lm -lbsd
+
+clean   :
+        rm -f $(NAME) $(OBJ) *~ core *.core
+
+
+re      : clean all

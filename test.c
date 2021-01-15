@@ -1,14 +1,18 @@
-#include <mlx.h>
-char map[6][6] = {
-        {'1','1','1','1','1','\0'},
-        {'1','0','0','0','1','\0'},
-        {'1','1','1','0','1','\0'},
-        {'1','0','1','0','1','\0'},
-        {'1','0','N','0','1','\0'},
-        {'1','1','1','1','1','\0'}
+#include "cub3d.h"
+
+/*
+char map[6][11] = {
+        {'1','1','1','1','1','1','1','1','1','1','\0'},
+        {'1','0','0','0','1','1','1','1','1','1','\0'},
+        {'1','1','1','0','1','1','1','1','1','1','\0'},
+        {'1','0','1','0','1','1','1','1','1','1','\0'},
+        {'1','0','N','0','1','1','1','1','1','1','\0'},
+        {'1','1','1','1','1','1','1','1','1','1','\0'}
     };
+
 void    *mlx;
 void    *mlx_win;
+
 typedef struct  s_data {
     void        *img;
     char        *addr;
@@ -25,6 +29,8 @@ void            circleBres(int xc, int yc, int r, int clr);
 void            draw_rect(int x, int y, int clr);
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
+*/
+/*
 int             main(void)
 {
    
@@ -42,7 +48,7 @@ int             main(void)
     mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
     mlx_loop(mlx);
 }
-
+*/
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
     char    *dst;
@@ -57,10 +63,10 @@ void draw_rect(int x, int y, int clr)
     int j;
 
     i = x;
-    while(i < x + 64)
+    while(i < x + 32)
     {
         j = y;
-        while(j < y + 64)
+        while(j < y + 32)
         {
             my_mlx_pixel_put(&img, i, j, clr);
             j++;
@@ -72,25 +78,38 @@ void draw_map()
 {
     int i;
     int j;
-
+    int wall        = 0x001ecbe1;
+    int playerclr   = 0x0068ee13;
+    int empty       = 0x00813329;
+    int spaces      = 0x006f3d8f;
+    int sprite      = 0x00ff7402;
     i = 0;
-    while(i < 6)
+    while(i < g_prm.nwlcnt + 2)
     {
         j = 0;
-        while(j < 5)
+        while(j < g_prm.lnglin + 4)
         {
-            if(map[i][j] == '1')
+            if(g_prm.map[i][j] == '1')
             {
-                draw_rect(j * 64, i * 64, 0x00DAF7A6);
+                draw_rect(j * 32, i * 32, wall );
             }
-            else if(map[i][j] == '0')
+            else if(g_prm.map[i][j] == '0')
             {
-                draw_rect(j * 64, i * 64, 0x00900C3F);
+                draw_rect(j * 32, i * 32, empty);
             }
-            else if(map[i][j] == 'N')
+            else if(g_prm.map[i][j] == 'N')
             {
-                draw_rect(j * 64, i * 64, 0x00900C3F);
-                draw_player(j * 64, i * 64, 0x00FFC300);
+                draw_rect(j * 32, i * 32, empty);
+                draw_player(j * 32, i * 32, playerclr);
+            }
+            else if(g_prm.map[i][j] == ' ')
+            {
+                draw_rect(j * 32, i * 32, spaces);
+            }
+            else if(g_prm.map[i][j] == '2')
+            {
+                draw_rect(j * 32, i * 32, empty);
+                draw_player(j * 32, i * 32, sprite);
             }
             j++;
         }
@@ -100,7 +119,7 @@ void draw_map()
 
 void    draw_player(int x, int y, int clr)
 {
-    int xc = x + 32, yc = y + 32, r = 5;
+    int xc = x + 16, yc = y + 16, r = 5;
     while(r >= 0)
     {
         circleBres(xc, yc, r, clr);
@@ -148,5 +167,6 @@ void circleBres(int xc, int yc, int r, int clr)
 
 void draw_ray(int x, int y, int clr)
 {
-
+    clr = x + y;
+    x = clr;
 }

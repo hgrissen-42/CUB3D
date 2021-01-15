@@ -22,6 +22,69 @@
 #include "GNL/get_next_line.h"
 #include "LIBFT/libft.h"
 
+typedef struct	s_prms {
+    int         inc;
+	int			w;
+	int			h;
+	int			fr;
+	int			fg;
+	int			fb;
+    int			cr;
+	int			cg;
+	int			cb;
+    char		*no;
+    char		*so;
+    char		*we;
+    char		*ea;
+    char		*s;
+    char        *str;
+    char        **map;
+    int         nwlcnt;
+    int         lnglin;
+
+}				t_prm;
+t_prm g_prm;
+
+typedef struct	s_errs {
+    int         num_prm;
+    int         dbl_inc;
+    int         elm_inv;
+    int         plr_cnt;
+    int         map_bgn;
+    int         inv_nwl;
+    int         map_inv;
+    int         map_spc;
+    int         map_open;
+}				t_err;
+t_err g_err;
+
+typedef struct  s_data {
+    void        *img;
+    char        *addr;
+    int         bits_per_pixel;
+    int         line_length;
+    int         endian;
+}               t_data;
+t_data  img;
+
+void    *mlx;
+void    *mlx_win;
+
+typedef struct  s_player {
+    float x;
+    float y;
+    float radius;
+    float turndir;
+    float walkdir;
+    float rotang;
+    float movespeed;
+    float turnspeed;
+}               t_player;
+t_player player;
+
+
+
+
 void        get_file();
 
 void        prm_init();
@@ -60,45 +123,17 @@ void        map_chk_opn();
 
 int         white_space(char *line);
 
-
+//render
+void            mlx_initialisation();
+void            draw_player(int x, int y, int clr);
+void            draw_map();
+void            drawCircle(int xc, int yc, int x, int y, int clr);
+void            circleBres(int xc, int yc, int r, int clr);
+void            draw_rect(int x, int y, int clr);
+void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 //debugging
 void print_struct_elemts();
 
-typedef struct	s_prms {
-    int         inc;
-	int			w;
-	int			h;
-	int			fr;
-	int			fg;
-	int			fb;
-    int			cr;
-	int			cg;
-	int			cb;
-    char		*no;
-    char		*so;
-    char		*we;
-    char		*ea;
-    char		*s;
-    char        *str;
-    char        **map;
-    int         nwlcnt;
-    int         lnglin;
-
-}				t_prm;
-t_prm g_prm;
-
-typedef struct	s_errs {
-    int         num_prm;
-    int         dbl_inc;
-    int         elm_inv;
-    int         plr_cnt;
-    int         map_bgn;
-    int         inv_nwl;
-    int         map_inv;
-    int         map_spc;
-    int         map_open;
-}				t_err;
-t_err g_err;
 
 #endif

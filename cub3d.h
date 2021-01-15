@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/14 16:20:01 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/15 18:39:51 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <mlx.h>
+#include <math.h>
 #include "GNL/get_next_line.h"
 #include "LIBFT/libft.h"
 
@@ -64,12 +65,16 @@ typedef struct  s_data {
     int         bits_per_pixel;
     int         line_length;
     int         endian;
+    int         tile_size;
 }               t_data;
-t_data  img;
+t_data  g_img;
 
-void    *mlx;
-void    *mlx_win;
 
+typedef struct  s_mlx {
+    void    *mlx;
+    void    *mlx_win;
+}               t_mlx;
+t_mlx g_mlx;
 typedef struct  s_player {
     float x;
     float y;
@@ -80,7 +85,7 @@ typedef struct  s_player {
     float movespeed;
     float turnspeed;
 }               t_player;
-t_player player;
+t_player g_player;
 
 
 
@@ -125,8 +130,9 @@ int         white_space(char *line);
 
 //render
 void            mlx_initialisation();
+void            render_player();
 void            draw_player(int x, int y, int clr);
-void            draw_map();
+void            render_map();
 void            drawCircle(int xc, int yc, int x, int y, int clr);
 void            circleBres(int xc, int yc, int r, int clr);
 void            draw_rect(int x, int y, int clr);

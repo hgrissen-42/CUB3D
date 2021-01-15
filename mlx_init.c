@@ -3,11 +3,12 @@
 
 void mlx_initialisation()
 {
-
-    mlx = mlx_init();
-    mlx_win = mlx_new_window(mlx, g_prm.w, g_prm.h, "Hello world!");
-    img.img = mlx_new_image(mlx, g_prm.w, g_prm.h);
-    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-                                 &img.endian);
-    
+    g_img.tile_size = 32;//(int)roundf(g_prm.w / g_prm.lnglin);
+    //g_prm.w = g_img.tile_size * g_prm.lnglin;
+    //g_prm.h = g_img.tile_size * g_prm.nwlcnt;
+    g_mlx.mlx = mlx_init();
+    g_mlx.mlx_win = mlx_new_window(g_mlx.mlx, g_prm.w, g_prm.h, "Hello world!");
+    g_img.img = mlx_new_image(g_mlx.mlx, g_prm.w, g_prm.h);
+    g_img.addr = mlx_get_data_addr(g_img.img, &g_img.bits_per_pixel, &g_img.line_length,
+                                 &g_img.endian);
 }

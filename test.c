@@ -1,6 +1,6 @@
-#include "cub3d.h"
+/*#include "cub3d.h"
 
-/*
+
 char map[6][11] = {
         {'1','1','1','1','1','1','1','1','1','1','\0'},
         {'1','0','0','0','1','1','1','1','1','1','\0'},
@@ -49,6 +49,7 @@ int             main(void)
     mlx_loop(mlx);
 }
 */
+/*
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
     char    *dst;
@@ -169,4 +170,4 @@ void draw_ray(int x, int y, int clr)
 {
     clr = x + y;
     x = clr;
-}
+}*/

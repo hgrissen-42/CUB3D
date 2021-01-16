@@ -6,13 +6,13 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 18:05:07 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/15 18:50:19 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/16 19:29:59 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void    my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
     char    *dst;
 
@@ -52,6 +52,15 @@ void    render_map()
         {
             if(g_prm.map[i][j] == '1' || g_prm.map[i][j] == ' ')
                 draw_rect(j * g_img.tile_size, i * g_img.tile_size, wall );
+            else if(is_player(g_prm.map[i][j]))
+            {
+                draw_rect(j * g_img.tile_size, i * g_img.tile_size, empty);
+                if (!g_player.x || !g_player.y)
+                {
+                    g_player.x = j * g_img.tile_size;
+                    g_player.y = i * g_img.tile_size;
+                }
+            }
             else
                 draw_rect(j * g_img.tile_size, i * g_img.tile_size, empty);
             j++;
@@ -89,13 +98,17 @@ void    render_player()
 
 void    draw_player(int x, int y, int clr)
 {
-    int xc = x + g_img.tile_size / 2, yc = y + g_img.tile_size / 2, r = 5;
+    int xc = x + g_img.tile_size / 2;
+    int yc = y + g_img.tile_size / 2;
+    int r = g_player.radius;
     while(r >= 0)
     {
         circleBres(xc, yc, r, clr);
         r--;
     }
+    draw_ray();
 }
+
 
 void    drawCircle(int xc, int yc, int x, int y, int clr) 
 { 
@@ -135,8 +148,19 @@ void    circleBres(int xc, int yc, int r, int clr)
     } 
 }
 
-void    draw_ray(int x, int y, int clr)
+void    draw_ray()
 {
-    clr = x + y;
-    x = clr;
+    int i;
+    int h = floor(cos(deg2rad(g_player.rotang)));
+    int v = floor(sin(deg2rad(g_player.rotang)));
+    int xc = g_player.x + g_img.tile_size / 2;
+    int yc = g_player.y + g_img.tile_size / 2;
+    
+    i = 1;
+    while (i < 30)
+    {
+        my_mlx_pixel_put(&g_img, xc + (i * h), yc + (i * v), 0x0068ee13);
+        i++;
+    }
+    
 }

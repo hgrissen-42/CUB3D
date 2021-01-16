@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/15 18:39:51 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/16 19:26:45 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 #include <math.h>
 #include "GNL/get_next_line.h"
 #include "LIBFT/libft.h"
+
+
+#define PI 3.14159265359
+
 
 typedef struct	s_prms {
     int         inc;
@@ -59,15 +63,15 @@ typedef struct	s_errs {
 }				t_err;
 t_err g_err;
 
-typedef struct  s_data {
+typedef struct  s_img {
     void        *img;
     char        *addr;
     int         bits_per_pixel;
     int         line_length;
     int         endian;
     int         tile_size;
-}               t_data;
-t_data  g_img;
+}               t_img;
+t_img  g_img;
 
 
 typedef struct  s_mlx {
@@ -76,14 +80,15 @@ typedef struct  s_mlx {
 }               t_mlx;
 t_mlx g_mlx;
 typedef struct  s_player {
-    float x;
-    float y;
-    float radius;
-    float turndir;
-    float walkdir;
-    float rotang;
-    float movespeed;
-    float turnspeed;
+    float   x;
+    float   y;
+    float   radius;
+    float   hor_dir;
+    float   vir_dir;
+    float   turndir;
+    double  rotang;
+    float   movespeed;
+    float   turnspeed;
 }               t_player;
 t_player g_player;
 
@@ -129,15 +134,29 @@ void        map_chk_opn();
 int         white_space(char *line);
 
 //render
-void            mlx_initialisation();
+void            canvas_init();
+void            player_init();
 void            render_player();
 void            draw_player(int x, int y, int clr);
+void            draw_ray();
 void            render_map();
 void            drawCircle(int xc, int yc, int x, int y, int clr);
 void            circleBres(int xc, int yc, int r, int clr);
 void            draw_rect(int x, int y, int clr);
-void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void            my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
+int             update();
+void            keys_loop();
+int             key_released(int keycode);
+int             key_pressed(int keycode);
+
+
+void            move();
+
+
+
+
+float   deg2rad(float ang);
 //debugging
 void print_struct_elemts();
 

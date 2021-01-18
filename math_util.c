@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 19:23:15 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/16 19:26:28 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/18 16:56:19 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 float   deg2rad(float ang)
 {
-    return ang - (PI / 180);
+    return ang * (PI / 180);
 }

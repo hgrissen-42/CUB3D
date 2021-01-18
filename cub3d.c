@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 11:57:14 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/16 19:29:21 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/18 18:47:03 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ int             key_pressed(int keycode)
     if (keycode == 2)
         g_player.hor_dir = 1;
     if (keycode == 1)
-        g_player.vir_dir = 1;
-    if (keycode == 13)
         g_player.vir_dir = -1;
+    if (keycode == 13)
+        g_player.vir_dir = 1;
     if (keycode == 123)
-        g_player.turndir = 1;
-    if (keycode == 124)
         g_player.turndir = -1;
+    if (keycode == 124)
+        g_player.turndir = 1;
     
     return 0;
 }
@@ -98,10 +98,26 @@ int             key_released(int keycode)
     
     return 0;
 }
-
+void movev()
+{
+    g_player.x          += (g_player.vir_dir * g_player.movespeed) * cos(g_player.rotang);
+    g_player.y          += (g_player.vir_dir * g_player.movespeed) * sin(g_player.rotang);
+}
+void moveh()
+{
+    g_player.x          += (g_player.hor_dir * g_player.movespeed) * cos(g_player.rotang + (PI / 2));
+    g_player.y          += (g_player.hor_dir * g_player.movespeed) * sin(g_player.rotang + (PI / 2));
+}
 void    move()
 {
-    g_player.x          += g_player.hor_dir * g_player.movespeed;
-    g_player.y          += g_player.vir_dir * g_player.movespeed;
-    g_player.rotang     += g_player.turndir * g_player.turnspeed;
+    g_player.rotang     += g_player.turndir * deg2rad(g_player.turnspeed);
+    //g_player.x          += (g_player.hor_dir * g_player.movespeed) * cos(g_player.rotang);
+    //g_player.y          += (g_player.vir_dir * g_player.movespeed) * sin(g_player.rotang);
+    moveh();
+    movev();
+    
+}
+void collision()
+{
+    
 }

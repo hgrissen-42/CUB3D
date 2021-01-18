@@ -1,3 +1,4 @@
+
 /*#include "cub3d.h"
 
 
@@ -171,3 +172,19 @@ void draw_ray(int x, int y, int clr)
     clr = x + y;
     x = clr;
 }*/
+
+
+
+
+
+
+
+
+
+
+
+// int x=5;
+// int y=7;
+
+// x = x + (2);
+// y = y + y;

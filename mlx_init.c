@@ -25,6 +25,7 @@ void    player_init()
     g_player.rotang      = -PI / 2;
     g_player.movespeed   = 5;
     g_player.turnspeed   = 5;
+    g_player.zebi        = 0;
 }
 
 void spc2wal()
@@ -42,5 +43,4 @@ void spc2wal()
         }
         i++;
     }
-    map_fil();
 }

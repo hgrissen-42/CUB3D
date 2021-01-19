@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 11:57:14 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/18 18:47:03 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/19 19:24:49 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int             closef(int keycode);
 int             render();
+void  collision();
 int main()
 {  
     prm_init();
@@ -66,9 +67,15 @@ int             key_pressed(int keycode)
     if (keycode == 53)
         exit (0);
     if (keycode == 0)
-        g_player.hor_dir = -1;
+    {
+        g_player.vir_dir = 1;
+        g_player.zebi    = - PI / 2;
+    }
     if (keycode == 2)
-        g_player.hor_dir = 1;
+    {
+        g_player.vir_dir = 1;
+        g_player.zebi    = PI / 2;
+    }
     if (keycode == 1)
         g_player.vir_dir = -1;
     if (keycode == 13)
@@ -84,9 +91,17 @@ int             key_released(int keycode)
 {
 
     if (keycode == 0)
-        g_player.hor_dir = 0;
+    {
+        //g_player.hor_dir = 0;
+        g_player.vir_dir = 0;
+        g_player.zebi    = 0;
+    }
     if (keycode == 2)
-        g_player.hor_dir = 0;
+    {
+        //g_player.hor_dir = 0;
+        g_player.vir_dir = 0;
+        g_player.zebi    = 0;
+    }
     if (keycode == 1)
         g_player.vir_dir = 0;
     if (keycode == 13)
@@ -100,24 +115,69 @@ int             key_released(int keycode)
 }
 void movev()
 {
-    g_player.x          += (g_player.vir_dir * g_player.movespeed) * cos(g_player.rotang);
-    g_player.y          += (g_player.vir_dir * g_player.movespeed) * sin(g_player.rotang);
+    g_player.x          += (g_player.vir_dir * g_player.movespeed) * cos(g_player.rotang + g_player.zebi);
+    g_player.y          += (g_player.vir_dir * g_player.movespeed) * sin(g_player.rotang + g_player.zebi);
 }
-void moveh()
-{
-    g_player.x          += (g_player.hor_dir * g_player.movespeed) * cos(g_player.rotang + (PI / 2));
-    g_player.y          += (g_player.hor_dir * g_player.movespeed) * sin(g_player.rotang + (PI / 2));
-}
+
 void    move()
 {
     g_player.rotang     += g_player.turndir * deg2rad(g_player.turnspeed);
-    //g_player.x          += (g_player.hor_dir * g_player.movespeed) * cos(g_player.rotang);
-    //g_player.y          += (g_player.vir_dir * g_player.movespeed) * sin(g_player.rotang);
-    moveh();
-    movev();
+    
+    // }
+    //movev();
+    g_player.x          += (g_player.vir_dir * g_player.movespeed) * cos(g_player.rotang + g_player.zebi);
+    g_player.y          += (g_player.vir_dir * g_player.movespeed) * sin(g_player.rotang + g_player.zebi);
+    //printf("%d   %d\n", (int)(g_player.y + 16)/ 32, (int)(g_player.x + 16)/ 32);
+    collision();
+    //moveh();
     
 }
+
 void collision()
 {
-    
+     if (g_prm.map[(int)(g_player.y + 16)/ 32][(int)(g_player.x + 16)/ 32] == '1' 
+     || g_prm.map[(int)(g_player.y + 16)/ 32][(int)(g_player.x + 16)/ 32] == '2') 
+    {
+        printf("%c\n", g_prm.map[(int)(g_player.y + 16)/ 32][(int)(g_player.x + 16)/ 32]);
+                     //printf("%d   %d\n", (int)g_player.y/ 32, (int)g_player.x/ 32);
+                     
+                     g_player.x          -= (g_player.vir_dir * g_player.movespeed) * cos(g_player.rotang + g_player.zebi);
+                     g_player.y          -= (g_player.vir_dir * g_player.movespeed) * sin(g_player.rotang + g_player.zebi);
+    }
+    else
+    {
+        printf("%c\n", g_prm.map[(int)(g_player.y + 16)/ 32][(int)(g_player.x + 16)/ 32]);
+                    //printf("%d   %d\n", (int)g_player.y / 32, (int)g_player.x / 32);
+    }
+//     int i;
+//     int j;
+//     i = 0;
+//     while(i < g_prm.nwlcnt + 2)
+//     {
+//         j = 0;
+//         while(j < g_prm.lnglin + 2)
+//         {
+            
+//             if(g_prm.map[i][j] == '1' || g_prm.map[i][j] == ' ')
+//             {
+//                 if ((int)(g_player.y + 16)/ 32 == j && (int)(g_player.x + 16)/ 32 == i) 
+//                  {
+//                     printf("%c\n", g_prm.map[i][j]);
+//                      //printf("%d   %d\n", (int)g_player.y/ 32, (int)g_player.x/ 32);
+                     
+//                      //g_player.x          -= (g_player.vir_dir * g_player.movespeed) * cos(g_player.rotang + g_player.zebi);
+//                      //g_player.y          -= (g_player.vir_dir * g_player.movespeed) * sin(g_player.rotang + g_player.zebi);
+//                 }
+//                 else
+//                 {
+//                     printf("%c\n", g_prm.map[i][j]);
+//                     //printf("%d   %d\n", (int)g_player.y / 32, (int)g_player.x / 32);
+//                 }
+                
+//             }
+//             j++;
+//         }
+//         i++;
 }
+    
+    

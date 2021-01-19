@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/16 19:26:45 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/19 17:13:19 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 
 #define PI 3.14159265359
-
+float   g_rays_dis[10000];
 
 typedef struct	s_prms {
     int         inc;
@@ -89,6 +89,7 @@ typedef struct  s_player {
     double  rotang;
     float   movespeed;
     float   turnspeed;
+    float   zebi;
 }               t_player;
 t_player g_player;
 

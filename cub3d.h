@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/19 17:13:19 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/21 17:54:36 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,18 @@
 #include "LIBFT/libft.h"
 
 
-#define PI 3.14159265359
+
 float   g_rays_dis[10000];
+
+#define PI 3.14159265359
+#define A_KEY 0
+#define D_KEY 2
+#define S_KEY 1
+#define W_KEY 13
+#define ESc_KEY 53
+#define L_ARR 123
+#define R_ARR 124
+
 
 typedef struct	s_prms {
     int         inc;
@@ -82,6 +92,7 @@ t_mlx g_mlx;
 typedef struct  s_player {
     float   x;
     float   y;
+    char    spawn_dir;
     float   radius;
     float   hor_dir;
     float   vir_dir;
@@ -89,7 +100,7 @@ typedef struct  s_player {
     double  rotang;
     float   movespeed;
     float   turnspeed;
-    float   zebi;
+    float   hlfpi;
 }               t_player;
 t_player g_player;
 
@@ -120,6 +131,8 @@ void        nwl_cnt();
 void        map_fil();
 void        spc_fil();
 void        build_map();
+void        spc2wal();
+float       spawn_direction();
 
 void        print_errs();
 int         ch_err();
@@ -135,6 +148,7 @@ void        map_chk_opn();
 int         white_space(char *line);
 
 //render
+int             render();
 void            canvas_init();
 void            player_init();
 void            render_player();
@@ -144,6 +158,7 @@ void            render_map();
 void            drawCircle(int xc, int yc, int x, int y, int clr);
 void            circleBres(int xc, int yc, int r, int clr);
 void            draw_rect(int x, int y, int clr);
+void            draw_ver(int x, int start, int end, int clr);
 void            my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 int             update();
@@ -153,8 +168,9 @@ int             key_pressed(int keycode);
 
 
 void            move();
+void            collision();
 
-
+int     is_corner(int x, int y);
 
 
 float   deg2rad(float ang);

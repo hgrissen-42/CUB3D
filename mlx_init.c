@@ -1,9 +1,8 @@
 #include "cub3d.h"
 
-void spc2wal();
+
 void canvas_init()
 {
-    spc2wal();
     g_img.tile_size = 32;
     g_mlx.mlx = mlx_init();
     g_mlx.mlx_win = mlx_new_window(g_mlx.mlx, g_prm.w, g_prm.h, "sma9looo");
@@ -13,7 +12,6 @@ void canvas_init()
     player_init();
 }
 
-
 void    player_init()
 {
     g_player.x           = 0;
@@ -22,25 +20,9 @@ void    player_init()
     g_player.turndir     = 0;
     g_player.vir_dir     = 0;
     g_player.hor_dir     = 0;
-    g_player.rotang      = -PI / 2;
+    g_player.rotang      = spawn_direction();
     g_player.movespeed   = 5;
     g_player.turnspeed   = 5;
-    g_player.zebi        = 0;
+    g_player.hlfpi        = 0;
 }
 
-void spc2wal()
-{
-    int i = 0;
-    int j = 0;
-    while(i <= g_prm.nwlcnt + 1)
-    {
-        j = 0;
-        while(j <= g_prm.lnglin + 1)
-        {
-            if (g_prm.map[i][j] == ' ')
-                g_prm.map[i][j] = '1';
-            j++;
-        }
-        i++;
-    }
-}

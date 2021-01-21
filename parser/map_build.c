@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:01:55 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/11 12:01:58 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/21 17:35:56 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void nwl_cnt()
     int cnt = 0;
     while(g_prm.str[i])
     {
-        //printf("%d\n", i);
         if(g_prm.str[i] == '\n')
             cnt++;
         i++;
@@ -107,4 +106,5 @@ void map_fil()
         }
         i++;
     }
+    spc2wal();
 }

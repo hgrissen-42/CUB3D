@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 18:05:07 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/21 17:54:20 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/23 19:05:49 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,32 @@ void    my_mlx_pixel_put(t_img *data, int x, int y, int color)
     *(unsigned int*)dst = color;
 }
 void    draw_stripes();
-
+float   distance(float x, float x1, float y, float y1);
+char    side_hit(float x, float y);
+int     is_wall(int x, int y);
+int     change_ray_clr(float x, float y);
 
 void    render_map()
 {
     int i;
     int j;
     int empty   = 0x00344966;
-    int wall    = 0x00B4CDED;
+    int wall    = 0x00F59038;//B4CDED;
     i = 0;
     while(i < g_prm.nwlcnt + 2)
     {
         j = 0;
         while(j < g_prm.lnglin + 2)
         {
+            if(is_player(g_prm.map[i][j]))
+            {
+                draw_rect(j * g_img.tile_size, i * g_img.tile_size, empty);
+                if (!g_player.x || !g_player.y)
+                {
+                    g_player.x = j * g_img.tile_size;
+                    g_player.y = i * g_img.tile_size;
+                }
+            }
             if(g_prm.map[i][j] == '1' || g_prm.map[i][j] == '2')
                 draw_rect(j * g_img.tile_size, i * g_img.tile_size, wall );
             else if(is_player(g_prm.map[i][j]))
@@ -76,6 +88,7 @@ void    draw_ray()
 {
     int j;
     int i;
+    int k;
     int xc = g_player.x + g_img.tile_size / 2;
     int yc = g_player.y + g_img.tile_size / 2;
     float inc;
@@ -92,21 +105,100 @@ void    draw_ray()
         {
             int h = i * cos(start_angle);
             int v = i * sin(start_angle);
-            if ((xc + h) % (g_img.tile_size) == 0 || (xc + h + 1) % (g_img.tile_size) == 0 || (yc + v) % (g_img.tile_size) == 0 || (yc + v + 1) % (g_img.tile_size) == 0)
-                if (g_prm.map[(yc + v) / (g_img.tile_size)][(xc + h) / (g_img.tile_size)] == '1' 
-                || is_corner(xc + h, yc + v)) 
-                    break;
+            // if ((xc + h) % (g_img.tile_size) == 0 || (xc + h + 1) % (g_img.tile_size) == 0 || (yc + v) % (g_img.tile_size) == 0 || (yc + v + 1) % (g_img.tile_size) == 0)
+            //     if (g_prm.map[(yc + v) / (g_img.tile_size)][(xc + h) / (g_img.tile_size)] == '1' 
+            //     || is_corner(xc + h, yc + v))
+            //     {
+            //         if ((int)(xc + h) % (g_img.tile_size) == 0 && is_wall(xc + h, yc + v))
+            //             my_mlx_pixel_put(&g_img, xc + h, yc + v, 0xff0000);//0x0068ee13
+            //         else if ((int)(xc + h + 1) % (g_img.tile_size) == 0 && is_wall(xc+h, yc + v))
+            //             my_mlx_pixel_put(&g_img, xc + h, yc + v, 0x00ff00);//0x0068ee13
+            //         else if ((int)(yc + v) % (g_img.tile_size) == 0 && is_wall(xc + h, yc + v))
+            //             my_mlx_pixel_put(&g_img, xc + h, yc + v, 0x0000ff);//0x0068ee13
+            //         else if ((int)(yc + v + 1) % (g_img.tile_size) == 0 && is_wall(xc + h, yc  + v))
+            //             my_mlx_pixel_put(&g_img, xc + h, yc + v, 0x00FFFFFF);//0x0068ee13
+            //         break;                    
+            //     }
+             if (change_ray_clr(xc +h, yc +v))
+                     break;
             //this is going to change
-            my_mlx_pixel_put(&g_img, xc + h, yc + v, 0x00F0F400);//0x0068ee13
+            //my_mlx_pixel_put(&g_img, xc + h, yc + v, 0x00F0F400);//0x0068ee13
             i++;
         }
-        g_rays_dis[j] = ((i * cos(start_angle)) - xc) + ((i * sin(start_angle)) - yc);
-        g_rays_dis[j] *= g_rays_dis[j];
+        k = 0;
+        while(k < i)
+        {
+            int h = k * cos(start_angle);
+            int v = k * sin(start_angle);
+            my_mlx_pixel_put(&g_img, xc + h, yc + v, rayclr);
+            k++;
+        }
+        g_rays_dis[j] = distance(xc, i * cos(start_angle), yc, i * sin(start_angle));
         j++;
     }
+    //draw_stripes();
 }
 
+float   distance(float x, float x1, float y, float y1)
+{
+    return (sqrt(pow(x1 - x, 2) + pow(y1 - y, 2)));
+}
 
+char    side_hit(float x, float y)
+{
+    if ((int)(x) % (g_img.tile_size) == 0 && is_wall(x, y) && !is_corner(x, y))
+        return ('W');
+    else if ((int)(x + 1) % (g_img.tile_size) == 0 && is_wall(x, y) && !is_corner(x, y))
+        return ('E');
+    else if ((int)(y) % (g_img.tile_size) == 0 && is_wall(x, y) && !is_corner(x, y))
+         return ('N');
+    else if ((int)(y + 1) % (g_img.tile_size) == 0 && is_wall(x, y) && !is_corner(x, y))
+        return ('S');
+    else
+        return (0);
+                 
+}
+
+int     is_wall(int x, int y)
+{
+    if (g_prm.map[(y) / (g_img.tile_size)][(x) / (g_img.tile_size)] == '1' || is_corner(x , y))
+        return (1);
+    else
+        return (0);
+    
+}
+
+int     change_ray_clr(float x, float y)
+{
+    if (is_corner(x, y))
+    {
+        return 1;
+    }
+    
+    if (side_hit(x, y) == 'N' && !is_corner(x, y))
+    {
+        rayclr = 0x00FF0000;
+        return (1);   
+    }
+    else if (side_hit(x, y) == 'S' && !is_corner(x, y))
+    {
+        rayclr = 0x0000FF00;
+        return (1);   
+    }
+    else if (side_hit(x, y) == 'E' && !is_corner(x, y))
+    {
+        rayclr = 0x000000FF;
+        return (1);   
+    }
+    else if (side_hit(x, y) == 'W' && !is_corner(x, y))
+    {
+        rayclr = 0x00FFFFFF;
+        return (1);
+    }
+    else
+        return (0);
+    
+}
 int     is_corner(int x, int y)
 {
     if (!((x + 1) % 32) && !((y + 1) % 32)
@@ -146,7 +238,7 @@ void draw_stripes()
         if(drawEnd >= g_prm.h)
             drawEnd = g_prm.h - 1;
         
-        draw_ver(i, drawStart, drawEnd, 0);
+        draw_ver(i, drawStart, drawEnd, 0x00F59038);
         i++;
     }
 }

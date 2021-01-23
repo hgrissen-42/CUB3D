@@ -10,6 +10,7 @@ void canvas_init()
     g_img.addr = mlx_get_data_addr(g_img.img, &g_img.bits_per_pixel,
     &g_img.line_length, &g_img.endian);
     player_init();
+    rayclr = 0;
 }
 
 void    player_init()

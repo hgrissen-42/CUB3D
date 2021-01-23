@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:46:46 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/21 17:57:30 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/23 15:23:20 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void    draw_ver(int x, int start, int end, int clr)
 {
     int i;
 
-    clr = 0x00FFFFFF;
+    //clr = 0x00FFFFFF;
     i = start;
     while(i < end)
     {

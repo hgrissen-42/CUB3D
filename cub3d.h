@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/21 17:54:36 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/01/23 18:22:02 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #include "LIBFT/libft.h"
 
 
-
+static int     rayclr;
 float   g_rays_dis[10000];
 
 #define PI 3.14159265359

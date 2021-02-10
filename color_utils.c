@@ -1,43 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   color_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/11 11:57:14 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/07 15:00:10 by hgrissen         ###   ########.fr       */
+/*   Created: 2021/02/09 16:19:12 by hgrissen          #+#    #+#             */
+/*   Updated: 2021/02/10 09:18:12 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main()
-{  
-    prm_init();
-    err_init();
-    get_file();
-    if (g_err.map_bgn)
-    { 
-        build_map();
-        map_chk_opn();
-    }
-    //print_struct_elemts();
-    Ch_fil_err();
-    //render_map();
-    canvas_init();
-    
-    mlx_loop_hook(g_mlx.mlx, update, &g_mlx);
-    mlx_loop(g_mlx.mlx);
+float	clamp_clr(float clr)
+{
+	clr = (clr < 0) ? 0 : clr;
+	clr = (clr > 255) ? 255 : clr;
+	return clr;
+}
 
-    return 0;
+int		get_r(int trgb)
+{
+	return (trgb & (0xFF << 16));
+}
+
+int		get_g(int trgb)
+{
+	return (trgb & (0xFF << 8));
+}
+
+int		get_b(int trgb)
+{
+	return (trgb & 0xFF);
 }
 
 
-
-
-
-
-
-    
-    
+int		rgb_to_int(int r, int g, int b)
+{
+	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+}

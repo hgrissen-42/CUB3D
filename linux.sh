@@ -1,1 +1,1 @@
-clear && gcc -g */*.c *.c -L.. -lmlx -L%%%%/../lib -lXext -lX11 -lm -lbsd && clear &&./a.out
+clear && gcc -g */*.c *.c -L.. -lmlx -L%%%%/../lib -lXext -lX11 -lm -lbsd -O3 && clear &&./a.out

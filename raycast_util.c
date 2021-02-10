@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   raycast_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/11 11:57:14 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/07 15:00:10 by hgrissen         ###   ########.fr       */
+/*   Created: 2021/02/02 17:06:50 by hgrissen          #+#    #+#             */
+/*   Updated: 2021/02/07 14:59:16 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main()
-{  
-    prm_init();
-    err_init();
-    get_file();
-    if (g_err.map_bgn)
-    { 
-        build_map();
-        map_chk_opn();
-    }
-    //print_struct_elemts();
-    Ch_fil_err();
-    //render_map();
-    canvas_init();
-    
-    mlx_loop_hook(g_mlx.mlx, update, &g_mlx);
-    mlx_loop(g_mlx.mlx);
+int     is_wall(int x, int y)
+{
+	int x1;
+	int y1;
 
-    return 0;
+	if (x < 0 || x > (g_prm.lnglin * TILE_SIZE) ||
+		y < 0 || y > (g_prm.nwlcnt* TILE_SIZE))
+		return (1);
+	x1 = floor(x / TILE_SIZE);
+	y1 = floor(y / TILE_SIZE);
+	if (g_prm.map[y1][x1] == '1')
+		return (1);
+	else
+		return (0);
 }
-
-
-
-
-
-
-
-    
-    

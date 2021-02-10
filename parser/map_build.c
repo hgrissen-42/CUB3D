@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:01:55 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/23 15:10:21 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/10 10:37:05 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void build_map()
     nwl_cnt();
     lng_lin();
     int  i = 0;
-    g_prm.map = malloc(sizeof(char *) * (g_prm.nwlcnt + 2));
+    g_prm.map = malloc(sizeof(char *) * (g_prm.nwlcnt + 2 + 1));
     while(i <= g_prm.nwlcnt + 1)
     {
-        g_prm.map[i] = malloc(sizeof(char) * (g_prm.lnglin + 2));
+        g_prm.map[i] = malloc(sizeof(char) * (g_prm.lnglin + 2 + 1));
         i++;
     }
     spc_fil();
@@ -83,6 +83,7 @@ void spc_fil()
         g_prm.map[i][j] = '\0';
         i++;
     }
+    g_prm.map[i] = NULL;
     map_fil();
 }
 
@@ -106,4 +107,5 @@ void map_fil()
         }
         i++;
     }
+    spc2wal();
 }

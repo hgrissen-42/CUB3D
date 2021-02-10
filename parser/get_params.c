@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:31:30 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/11 12:01:28 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/10 10:13:56 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	get_res(char* line)
 {
+	// check line[1] to see if there is someyhing wierd
 	int i;
 	int num;
 

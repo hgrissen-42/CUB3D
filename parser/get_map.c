@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 15:21:32 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/21 17:25:45 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/10 10:06:28 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,22 @@ void get_map(char* line)
 
 void addline(char *line)
 {
-    char *nwl = "\n";
+    char *nwl;
+    char *tmp;
+
+    nwl = ft_strdup("\n");
     if (g_prm.str == NULL)
+    {
         g_prm.str = ft_strdup(line);
+    }
     else
+    {
+        tmp = g_prm.str; 
         g_prm.str = ft_strjoin(g_prm.str, line);
+        free(tmp);
+    }
+    tmp = g_prm.str; 
     g_prm.str = ft_strjoin(g_prm.str, nwl);
+    free(nwl);
+    free(tmp);
 }

@@ -5,27 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/19 10:05:00 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/04 14:41:56 by hgrissen         ###   ########.fr       */
+/*   Created: 2019/10/18 10:29:57 by rchallie          #+#    #+#             */
+/*   Updated: 2021/02/10 10:31:15 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
-
 # define GET_NEXT_LINE_H
 
-# include <fcntl.h>
-
 # include <stdlib.h>
-
 # include <unistd.h>
+# define BUFFER_SIZE 100
 
-#include "../LIBFT/libft.h"
+int					get_next_line(int fd, char **line);
+int					has_return(char *str);
 
-#define BUFFER_SIZE 1000
+size_t				xft_strlen(const char *s);
 
-int				outtil(int fd, char **rest, char **line);
-int				get_next_line(int fd, char **line);
-char			*linend(char		*str);
+char				*join_str(const char *s1, const char *s2);
 
 #endif

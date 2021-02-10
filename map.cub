@@ -1,11 +1,11 @@
-R    2000 1000
-WE  ./sma9lo/file
-NO  ./taha   
-EA  ./lmeki 
-SO  ./saleh  
-S   ./etazi
-F   10,10,20
-C   10,10,90
+WE  ./textures/we1.xpm
+NO  ./textures/no1.xpm
+EA  ./textures/ea1.xpm
+SO  ./textures/so1.xpm
+S   ./textures/sp.xpm
+R 2048 1152
+F   20,100,3
+C   0,10,255
 
 
 11111111111111111111111111111111111111111111111111111111111

@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:42 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/11 12:01:18 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/10 10:20:08 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,16 @@ void   get_file()
     while(get_next_line(fd, &line))
     {
         treat_file(line);
+        free(line);
+        line = NULL;
     }
+    
     treat_file(line);
+    if(line)
+    {
+        free(line);
+        line = NULL;
+    }
 }
 
 void    treat_file(char*    line)

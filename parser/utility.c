@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 17:39:28 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/21 17:35:29 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/01 14:21:21 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int white_space(char *line)
 float   spawn_direction()
 {
     if (g_player.spawn_dir == 'N')
-        return (-PI / 2);
+        return (-M_PI / 2);
     else if (g_player.spawn_dir == 'W')
-        return (PI);
+        return (M_PI);
     else if (g_player.spawn_dir == 'S')
-        return (PI / 2);
+        return (M_PI / 2);
     else if (g_player.spawn_dir == 'E')
         return (0);
     else

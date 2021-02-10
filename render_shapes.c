@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:46:46 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/01/23 15:23:20 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/07 11:56:15 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void    draw_rect(int x, int y, int clr)
     int i;
     int j;
     i = x;
-    while(i < x + g_img.tile_size)
+    while(i < x + TILE_SIZE)
     {
         j = y;
-        while(j < y + g_img.tile_size)
+        while(j < y + TILE_SIZE)
         {
-            if (i % (x + g_img.tile_size) == 0 || (i + 1) % (x + g_img.tile_size) == 0 || j % (y + g_img.tile_size) == 0 || (j + 1) % (y + g_img.tile_size) == 0)
+            if (i % (x + TILE_SIZE) == 0 || (i + 1) % (x + TILE_SIZE) == 0 || j % (y + TILE_SIZE) == 0 || (j + 1) % (y + TILE_SIZE) == 0)
             {
                  my_mlx_pixel_put(&g_img, i, j, 0x000000);
             }
@@ -73,8 +73,7 @@ void    circleBres(int xc, int yc, int r, int clr)
 void    draw_ver(int x, int start, int end, int clr)
 {
     int i;
-
-    //clr = 0x00FFFFFF;
+    
     i = start;
     while(i < end)
     {

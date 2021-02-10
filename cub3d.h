@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 09:29:19 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/10 19:34:09 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@
 #include "LIBFT/libft.h"
 
 #define P_RADIUS 1
-#define MINI_MAP 5
-#define TILE_SIZE 32
+#define MINI_MAP 10
+#define TILE_SIZE 64
 #define FOV 60 * (M_PI / 180)
 //#define M_PI 3.14159265359
 # define FLT_MAX 3.402823e+38
-# define CROUCH 200
+# define CROUCH 50
 
 
 #define A_KEY 0
@@ -48,9 +48,12 @@ int				g_is_up;
 int				g_is_right;
 int				g_is_left;
 
-unsigned int				g_red;
-unsigned int				g_green;
-unsigned int				g_blue;
+unsigned int	g_red;
+unsigned int	g_green;
+unsigned int	g_blue;
+
+int				*g_spad;
+float			g_sz;
 
 typedef struct	s_prms {
     int         inc;
@@ -100,7 +103,7 @@ t_img  g_so;
 t_img  g_ea;
 t_img  g_we;
 t_img  g_no;
-t_img  g_sp;
+t_img  g_si;
 
 typedef struct  s_mlx {
     void    *mlx;
@@ -122,7 +125,7 @@ typedef struct  s_player {
 	int		iscrouch;
 	int		crouch;
 }               t_player;
-t_player g_player;
+t_player g_p;
 
 typedef struct	s_rays {
 	float		angle;
@@ -174,9 +177,44 @@ typedef struct	s_wall
 	int		yoff;
 	int		dist;
 }				t_wall;
-
 t_wall			g_col;
 
+typedef	struct	s_bmp_header
+{
+	char		type[2];
+	u_int32_t	filesize;
+	u_int16_t	reserved1;
+	u_int16_t	reserved2;
+	u_int32_t	pxdataoff;
+	u_int32_t	headersize;
+	int32_t		width;
+	int32_t		height;
+	u_int16_t	planes;
+	u_int16_t	bpp;
+	u_int32_t	compression;
+	u_int32_t	imagesize;
+	int32_t		xpermeter;
+	int32_t		ypermeter;
+	u_int32_t	totalcolors;
+	u_int32_t	importantcolors;
+}				t_bmp_file;
+
+t_bmp_file		g_bmp;
+int				g_save;
+
+typedef struct	s_prite
+{
+	float	x;
+	float	xof;
+	float	y;
+	float	yof;
+	float	dist;
+	float	size;
+}				t_sprite;
+t_sprite		*g_sp;
+int				g_s_count;
+int				g_save;
+char			*g_file;
 
 void            get_file();
 
@@ -209,14 +247,14 @@ void            print_errs();
 int             ch_err();
 int             rgb_err();
 int             res_err();
-int         pat_err();
-int         res_out();
-int         rgb_out();
-void        Ch_fil_err();
-void        map_err();
-void        map_chk_opn();
+int         	pat_err();
+int         	res_out();
+int         	rgb_out();
+void        	Ch_fil_err();
+void        	map_err();
+void        	map_chk_opn();
 
-int         white_space(char *line);
+int         	white_space(char *line);
 
 //render
 void            render_flr_cei();
@@ -235,21 +273,31 @@ void            draw_rect(int x, int y, int clr);
 void            draw_ver(int x, int start, int end, int clr);
 void            my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
-int					shade(int i, int wall, char x);
-unsigned int		shadow(unsigned int color, int col);
-int					shadedcolor(int r, int g, int b, float percent);
+int				shade(int i, int wall, char x);
+unsigned int	shadow(unsigned int color, int col);
+int				shadedcolor(int r, int g, int b, float percent);
 
-void	    		texture_error(int error);
-void				init_textures(void);
-int					assign_textures(int i);
-void				ray_norm(int i);
+void	    	texture_error(int error);
+void			init_textures(void);
+int				assign_textures(int i);
+void			ray_norm(int i);
+
+//sprite
+void			draw_sprite(int id);
+void			to_sprite(void);
+void			to_sort(void);
+void			init_sprite(void);
+
+//screenshot
+void		save_bmp(void);
+void		screenshot();
 
 //color utility
-float				clamp_clr(float clr);
-int					get_r(int trgb);
-int					get_g(int trgb);
-int					get_b(int trgb);
-int					rgb_to_int(int r, int g, int b);
+float			clamp_clr(float clr);
+int				get_r(int trgb);
+int				get_g(int trgb);
+int				get_b(int trgb);
+int				rgb_to_int(int t, int r, int g, int b);
 
 //ray casting 
 //void            cast_all_rays();
@@ -264,13 +312,15 @@ void            move();
 void            collision();
 
 int             is_corner(int x, int y);
-int             is_wall(int x, int y);
+int				is_wall(float x, float y);
+int				is_sprite(float x, float y);
 
 //math utils
 float			clamp_percent(float percent);
 float           normalize_ang(float ang);
-float           deg2rad(float ang);
+float           d2r(float ang);
 float           dis_pts(float x1, float y1, float x2, float y2);
+float			deg(float x);
 //debugging
 void            print_struct_elemts();
 

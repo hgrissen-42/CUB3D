@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 15:21:32 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 10:06:28 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/10 17:50:30 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void get_map(char* line)
         if(is_map(line[i]))
         {
             g_err.map_bgn = 1;
-            if(is_player(line[i]) && (g_player.spawn_dir = line[i]))
+            if(is_player(line[i]) && (g_p.spawn_dir = line[i]))
                 g_err.plr_cnt++;
             if (is_notspace(line[i]))
                 gd = 1;

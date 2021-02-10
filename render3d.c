@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 12:36:01 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 10:48:59 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/10 19:36:15 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ unsigned int		shadow(unsigned int color, int col)
 	r = (((color >> 16) & 0xFF)) * fact;
 	g = (((color >> 8) & 0xFF)) * fact;
 	b= ((color) & (0xFF)) * fact;
-	dark = rgb_to_int(r, g, b);
+	dark = rgb_to_int(0, r, g, b);
 	if (dark > color)
 	 	dark = color;
 	return (dark);
@@ -45,7 +45,7 @@ int		shade(int i, int wall, char x)
 	float percent;
 	int crouch;
 	
-	crouch = g_player.iscrouch ? CROUCH : 0;
+	crouch = g_p.iscrouch ? CROUCH : 0;
 	if (wall != 0)
 	{
 		percent = ((g_col.perp_dist) / (g_prm.h / 2));
@@ -78,7 +78,7 @@ void    render_flr_cei()
 	int cc;
 	int crouch;
 	
-	crouch = g_player.iscrouch ? CROUCH * 2 : 0;
+	crouch = g_p.iscrouch ? CROUCH * 2 : 0;
 	i = -1;
 	while (++i < g_prm.h)
 	{

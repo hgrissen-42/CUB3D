@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:08:43 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 09:45:25 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/10 17:50:30 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void		walls3d(void)
 		while (y < g_col.wallbot)
 		{
 			g_col.dist = y + (g_col.strip_h / 2) - (g_prm.h / 2);
-			g_col.dist += g_player.iscrouch ? CROUCH : 0;
-			g_col.yoff = (int)(g_col.dist * ((float)32 / g_col.strip_h));
+			g_col.dist += g_p.iscrouch ? CROUCH : 0;
+			g_col.yoff = (int)(g_col.dist * ((float)TILE_SIZE / g_col.strip_h));
 			my_mlx_pixel_put(&g_img, i, y, assign_textures(i));
 			y++;
 		}
@@ -40,20 +40,20 @@ void		walls3d(void)
 
 void		ray_norm(int i)
 {
-	g_col.perp_dist = g_rays[i].dist * cos(g_rays[i].angle - g_player.rotang);
+	g_col.perp_dist = g_rays[i].dist * cos(g_rays[i].angle - g_p.rotang);
 	g_col.distproj = (g_prm.w / 2) / tan(FOV / 2);
 	g_col.projwallh = (TILE_SIZE / g_col.perp_dist) * g_col.distproj;
 	g_col.strip_h = (int)g_col.projwallh;
 	g_col.walltop = (g_prm.h / 2) - (g_col.strip_h / 2);
-	g_col.walltop -= g_player.iscrouch ? CROUCH : 0;
+	g_col.walltop -= g_p.iscrouch ? CROUCH : 0;
 	g_col.walltop = g_col.walltop < 0 ? 0 : g_col.walltop;
 	g_col.wallbot = (g_prm.h / 2) + (g_col.strip_h / 2);
-	g_col.wallbot -= g_player.iscrouch ? CROUCH : 0;
+	g_col.wallbot -= g_p.iscrouch ? CROUCH : 0;
 	g_col.wallbot = (g_col.wallbot > g_prm.h) ? g_prm.h : g_col.wallbot;
 	if (g_rays[i].hit_v)
-		g_col.xoff = (int)g_rays[i].hity % 32;
+		g_col.xoff = (int)g_rays[i].hity % TILE_SIZE;
 	else
-		g_col.xoff = (int)g_rays[i].hitx % 32;
+		g_col.xoff = (int)g_rays[i].hitx % TILE_SIZE;
 }
 
 int			assign_textures(int i)
@@ -66,13 +66,13 @@ int			assign_textures(int i)
 	txtarr[2] = (int*)g_we.addr;
 	txtarr[3] = (int*)g_ea.addr;
 	if (g_rays[i].is_up && !g_rays[i].hit_v)
-		dst = txtarr[1][32 * g_col.yoff + g_col.xoff];
+		dst = txtarr[1][TILE_SIZE * g_col.yoff + g_col.xoff];
 	if (g_rays[i].is_left && g_rays[i].hit_v)
-		dst = txtarr[0][32 * g_col.yoff + g_col.xoff];
+		dst = txtarr[0][TILE_SIZE * g_col.yoff + g_col.xoff];
 	if (g_rays[i].is_down && !g_rays[i].hit_v)
-		dst = txtarr[3][32 * g_col.yoff + g_col.xoff];
+		dst = txtarr[3][TILE_SIZE * g_col.yoff + g_col.xoff];
 	if (g_rays[i].is_right && g_rays[i].hit_v)
-		dst = txtarr[2][32 * g_col.yoff + g_col.xoff];
+		dst = txtarr[2][TILE_SIZE * g_col.yoff + g_col.xoff];
 	return (shadow((unsigned int)dst, i));
 }
 

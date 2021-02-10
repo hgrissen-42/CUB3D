@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:52:49 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/07 14:34:50 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/10 17:50:30 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ void		horz_ray(float angle)
 void		push_ray(int strip_id)
 {
 	if (g_r.found_horzhit)
-		g_r.hdist = dis_pts(g_player.x, g_player.y, g_r.horz_hitx, g_r.horz_hity);
+		g_r.hdist = dis_pts(g_p.x, g_p.y, g_r.horz_hitx, g_r.horz_hity);
 	else
 		g_r.hdist = FLT_MAX;
 	if (g_r.found_verthit)
-		g_r.vdist = dis_pts(g_player.x, g_player.y, g_r.vert_hitx, g_r.vert_hity);
+		g_r.vdist = dis_pts(g_p.x, g_p.y, g_r.vert_hitx, g_r.vert_hity);
 	else
 		g_r.vdist = FLT_MAX;
 	if (g_r.vdist < g_r.hdist)
@@ -105,16 +105,16 @@ void		cast_ray(int strip_id, float angle)
 	g_r.found_horzhit = 0;
 	g_r.horz_hitx = 0;
 	g_r.horz_hity = 0;
-	g_r.y_intercept = floor(g_player.y / TILE_SIZE) * TILE_SIZE;
+	g_r.y_intercept = floor(g_p.y / TILE_SIZE) * TILE_SIZE;
 	g_r.y_intercept += g_is_down ? TILE_SIZE : 0;
-	g_r.x_intercept = g_player.x + (g_r.y_intercept - g_player.y) / tan(angle);
+	g_r.x_intercept = g_p.x + (g_r.y_intercept - g_p.y) / tan(angle);
 	horz_ray(angle);
 	g_r.found_verthit = 0;
 	g_r.vert_hitx = 0;
 	g_r.vert_hity = 0;
-	g_r.x_intercept = floor(g_player.x / TILE_SIZE) * TILE_SIZE;
+	g_r.x_intercept = floor(g_p.x / TILE_SIZE) * TILE_SIZE;
 	g_r.x_intercept += g_is_right ? TILE_SIZE : 0;
-	g_r.y_intercept = g_player.y + (g_r.x_intercept - g_player.x) * tan(angle);
+	g_r.y_intercept = g_p.y + (g_r.x_intercept - g_p.x) * tan(angle);
 	vert_ray(angle);
 	push_ray(strip_id);
 	g_rays[strip_id].angle = angle;
@@ -130,7 +130,7 @@ void		cast_rays(void)
 	int		strip_id;
 
 	strip_id = 0;
-	ray_angle = g_player.rotang - (FOV / 2);
+	ray_angle = g_p.rotang - (FOV / 2);
 	while (strip_id < g_prm.w)
 	{
 		cast_ray(strip_id, ray_angle);

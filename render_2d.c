@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 18:05:07 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 10:51:04 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/10 18:05:12 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ void    draw_player(int x, int y, int clr)
 {
     int xc = x;
     int yc = y;
-    //int h = 10 * cos(deg2rad(g_player.rotang));
-    //int v = 10 * sin(deg2rad(g_player.rotang));
+    ///////////afcwecwe/////
     int r = P_RADIUS;
     xc /= MINI_MAP;
     yc /= MINI_MAP;
@@ -69,7 +68,6 @@ void    draw_player(int x, int y, int clr)
         circleBres(xc, yc, r, clr);
         r--;
     }
-    //draw_ray();
 }
 
 
@@ -78,14 +76,14 @@ void    draw_ray()
     int j;
     int i;
     //int k;
-    int xc = g_player.x;// + TILE_SIZE / 2;
-    int yc = g_player.y;// + TILE_SIZE / 2;
+    int xc = g_p.x;// + TILE_SIZE / 2;
+    int yc = g_p.y;// + TILE_SIZE / 2;
     float inc;
     float start_angle;
 
     j = 0;
-    inc = deg2rad(60.0f / g_prm.w);
-    start_angle = g_player.rotang - deg2rad(30);
+    inc = d2r(60.0f / g_prm.w);
+    start_angle = g_p.rotang - d2r(30);
     while(j < g_prm.w)
     {
         i = 1;
@@ -161,21 +159,21 @@ char    side_hit(float x, float y)
 // }
 int     is_corner(int x, int y)
 {
-    if (!((x + 1) % 32) && !((y + 1) % 32)
-    && (g_prm.map[(y - 2) / 32][(x - 2) / 32] == '1'
-    && g_prm.map[(y + 2) / 32][(x + 2) / 32] == '1'))
+    if (!((x + 1) % TILE_SIZE) && !((y + 1) % TILE_SIZE)
+    && (g_prm.map[(y - 2) / TILE_SIZE][(x - 2) / TILE_SIZE] == '1'
+    && g_prm.map[(y + 2) / TILE_SIZE][(x + 2) / TILE_SIZE] == '1'))
         return (1);
-    if (!((x) % 32) && !((y + 1) % 32)
-    && (g_prm.map[(y - 2) / 32][(x + 2) / 32] == '1'
-    && g_prm.map[(y + 2) / 32][(x - 2) / 32] == '1'))
+    if (!((x) % TILE_SIZE) && !((y + 1) % TILE_SIZE)
+    && (g_prm.map[(y - 2) / TILE_SIZE][(x + 2) / TILE_SIZE] == '1'
+    && g_prm.map[(y + 2) / TILE_SIZE][(x - 2) / TILE_SIZE] == '1'))
         return (1);
-    if (!((x) % 32) && !((y) % 32)
-    && (g_prm.map[(y - 2) / 32][(x + 2) / 32] == '1'
-    && g_prm.map[(y + 2) / 32][(x - 2) / 32] == '1'))
+    if (!((x) % TILE_SIZE) && !((y) % TILE_SIZE)
+    && (g_prm.map[(y - 2) / TILE_SIZE][(x + 2) / TILE_SIZE] == '1'
+    && g_prm.map[(y + 2) / TILE_SIZE][(x - 2) / TILE_SIZE] == '1'))
         return (1);
-    if (!((x + 1) % 32) && !((y) % 32)
-    && (g_prm.map[(y - 2) / 32][(x - 2) / 32] == '1'
-    && g_prm.map[(y + 2) / 32][(x + 2) / 32] == '1'))
+    if (!((x + 1) % TILE_SIZE) && !((y) % TILE_SIZE)
+    && (g_prm.map[(y - 2) / TILE_SIZE][(x - 2) / TILE_SIZE] == '1'
+    && g_prm.map[(y + 2) / TILE_SIZE][(x + 2) / TILE_SIZE] == '1'))
         return (1);
     return (0);
 }

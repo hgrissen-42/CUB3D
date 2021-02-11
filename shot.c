@@ -6,12 +6,11 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:36:39 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 17:02:28 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/11 17:45:40 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void		header_init(void)
 {

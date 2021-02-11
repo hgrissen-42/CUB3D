@@ -6,19 +6,18 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:11:55 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 19:11:19 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/11 16:20:37 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    move()
+void	move(void)
 {
-    float	newx;
+	float	newx;
 	float	newy;
 	float	move_step;
 
-    //g_p.crouch = g_p.iscrouch * CROUCH;
 	g_p.rotang += (g_p.turndir * g_p.turnspeed);
 	move_step = g_p.vir_dir * g_p.movespeed;
 	newx = g_p.x + cos(g_p.rotang + g_p.hlfpi) * (move_step);
@@ -29,9 +28,8 @@ void    move()
 	if ((!is_wall(newx + 20, g_p.y)) && (!is_wall(newx - 20, g_p.y))
 		&& !is_sprite(newx, g_p.y))
 		g_p.x = newx;
-    //collision();
 }
 
-void collision()
+void	collision(void)
 {
 }

@@ -6,13 +6,11 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 11:57:14 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 17:09:37 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/11 18:06:12 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
 
 void	arguments_errors(int error)
 {
@@ -56,40 +54,32 @@ void	arguments(int argc, char *argv[])
 		arguments_errors(3);
 }
 
-void  screenshot()
+void	screenshot(void)
 {
-    save_bmp();
-    exit(0);
+	save_bmp();
+	exit(0);
 }
 
-int main(int argc, char **argv)
-{  
-    prm_init();
-    err_init();
+int		main(int argc, char **argv)
+{
+	if (argc <= 1)
+	{
+		printf("Error\n .cub file missing");
+		exit(0);
+	}
+	prm_init();
+	err_init();
 	arguments(argc, argv);
-    get_file();
-    if (g_err.map_bgn)
-    { 
-        build_map();
-        map_chk_opn();
-    }
-    //print_struct_elemts();
-    Ch_fil_err();
-    //render_map();
-    canvas_init();
-    init_sprite();
-    
-    mlx_loop_hook(g_mlx.mlx, update, &g_mlx);
-    mlx_loop(g_mlx.mlx);
-
-    return 0;
+	get_file();
+	if (g_err.map_bgn)
+	{
+		build_map();
+		map_chk_opn();
+	}
+	ch_fil_err();
+	canvas_init();
+	init_sprite();
+	mlx_loop_hook(g_mlx.mlx, update, &g_mlx);
+	mlx_loop(g_mlx.mlx);
+	return (0);
 }
-
-
-
-
-
-
-
-    
-    

@@ -6,15 +6,14 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:31:30 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 10:13:56 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/11 18:29:18 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	get_res(char* line)
+void	get_res(char *line)
 {
-	// check line[1] to see if there is someyhing wierd
 	int i;
 	int num;
 
@@ -37,7 +36,7 @@ void	get_res(char* line)
 	g_prm.inc++;
 }
 
-void	get_rgb(char* line, int f)
+void	get_rgb(char *line, int f)
 {
 	int i;
 	int num;
@@ -46,9 +45,10 @@ void	get_rgb(char* line, int f)
 	cnt = 0;
 	i = 1;
 	i += white_space(&line[i]);
-	while(line[i])
+	while (line[i])
 	{
-		if(ft_isdigit(line[i]) || (line[i] == ',' && ft_isdigit(line[++i]) && cnt > 0))
+		if (ft_isdigit(line[i]) || (line[i] == ',' &&
+		ft_isdigit(line[++i]) && cnt > 0))
 		{
 			line[i] == ',' ? i++ : 0;
 			num = ft_atoi(&line[i]);
@@ -58,7 +58,7 @@ void	get_rgb(char* line, int f)
 		else
 		{
 			g_err.elm_inv = 1;
-			break;
+			break ;
 		}
 	}
 	cnt != 3 ? g_err.num_prm = 1 : 0;

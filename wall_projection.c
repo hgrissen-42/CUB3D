@@ -6,12 +6,11 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:08:43 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 17:50:30 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/11 17:47:32 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void		walls3d(void)
 {
@@ -19,13 +18,11 @@ void		walls3d(void)
 	int		y;
 
 	i = 0;
-	
 	init_textures();
 	while (i < g_prm.w)
 	{
 		ray_norm(i);
 		y = g_col.walltop;
-    
 		while (y < g_col.wallbot)
 		{
 			g_col.dist = y + (g_col.strip_h / 2) - (g_prm.h / 2);
@@ -103,7 +100,7 @@ void		init_textures(void)
 		g_ea.addr = mlx_get_data_addr(g_ea.img, &g_ea.bpp, &g_ea.ll, &g_ea.end);
 }
 
-void	texture_error(int error)
+void		texture_error(int error)
 {
 	if (error == 1)
 		printf("Error:\ninvalid north texture!\n");

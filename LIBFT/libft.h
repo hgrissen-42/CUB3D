@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 01:38:01 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/01 14:21:21 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/11 18:58:14 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 size_t				ft_strlen(const char *s);
-char				*ft_strmaM_PI(char const *s, char (*f)(unsigned int, char));
+char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strncmp(const char *str1, const char *str2, size_t n);
 char				*ft_strnstr(const char *haystack
 		, const char *needle, size_t len);

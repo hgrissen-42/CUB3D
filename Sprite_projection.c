@@ -6,12 +6,11 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 11:36:38 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 19:42:56 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/11 19:09:15 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 void	init_sprite(void)
 {
@@ -82,7 +81,7 @@ void	to_sprite(void)
 			angle -= 2 * M_PI;
 		while (angle - g_p.rotang < -M_PI)
 			angle += 2 * M_PI;
-		g_sp[k].size = (float)((g_prm.w / g_sp[k].dist) * TILE_SIZE / 2);
+		g_sp[k].size = (float)((g_prm.w / g_sp[k].dist) * TILE_SIZE);
 		g_sp[k].yof = (float)(g_prm.h / 2 - g_sp[k].size / 2);
 		g_sp[k].xof = (float)(((deg(angle) - deg(g_p.rotang)) * g_prm.w)
 		/ TILE_SIZE + ((g_prm.w / 2) - (int)g_sp[k].size / 2));
@@ -113,7 +112,7 @@ void	draw_sprite(int id)
 			+ (TILE_SIZE * i / (int)g_sz))];
 			if (c != g_spad[0])
 				my_mlx_pixel_put(&g_img, i + g_sp[id].xof, j + g_sp[id].yof
-				- (g_p.iscrouch * CROUCH) + 50, c);
+				- (g_p.iscrouch * CROUCH), c);
 		}
 	}
 }

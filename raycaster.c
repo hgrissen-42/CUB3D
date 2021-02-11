@@ -6,13 +6,13 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:52:49 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/10 17:50:30 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/11 16:25:57 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		vert_ray(float angle)
+void	vert_ray(float angle)
 {
 	g_r.xstep = TILE_SIZE;
 	g_r.xstep *= g_is_left ? -1 : 1;
@@ -41,7 +41,7 @@ void		vert_ray(float angle)
 	}
 }
 
-void		horz_ray(float angle)
+void	horz_ray(float angle)
 {
 	g_r.ystep = TILE_SIZE;
 	g_r.ystep *= g_is_up ? -1 : 1;
@@ -70,7 +70,7 @@ void		horz_ray(float angle)
 	}
 }
 
-void		push_ray(int strip_id)
+void	push_ray(int strip_id)
 {
 	if (g_r.found_horzhit)
 		g_r.hdist = dis_pts(g_p.x, g_p.y, g_r.horz_hitx, g_r.horz_hity);
@@ -95,7 +95,8 @@ void		push_ray(int strip_id)
 		g_rays[strip_id].hit_v = 0;
 	}
 }
-void		cast_ray(int strip_id, float angle)
+
+void	cast_ray(int strip_id, float angle)
 {
 	angle = normalize_ang(angle);
 	g_is_down = angle > 0 && angle < M_PI;
@@ -124,7 +125,7 @@ void		cast_ray(int strip_id, float angle)
 	g_rays[strip_id].is_left = g_is_left;
 }
 
-void		cast_rays(void)
+void	cast_rays(void)
 {
 	float	ray_angle;
 	int		strip_id;

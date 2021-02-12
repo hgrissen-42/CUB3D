@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:11:55 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 16:20:37 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/12 11:29:16 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	move(void)
 	if ((!is_wall(newx + 20, g_p.y)) && (!is_wall(newx - 20, g_p.y))
 		&& !is_sprite(newx, g_p.y))
 		g_p.x = newx;
+	if (BON == 0)
+	{
+		g_p.x = newx;
+		g_p.y = newy;
+	}
 }
 
 void	collision(void)

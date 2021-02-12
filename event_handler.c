@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:09:24 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 16:05:56 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/12 10:44:05 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		key_released(int keycode)
 		g_p.turndir = 0;
 	if (keycode == R_ARR)
 		g_p.turndir = 0;
-	if (keycode == SPACE)
+	if (keycode == SPACE && BON == 1)
 		g_p.iscrouch = 0;
 	return (0);
 }
@@ -88,7 +88,7 @@ int		render(void)
 	render_flr_cei();
 	walls3d();
 	to_sprite();
-	if (!g_save)
+	if (!g_save && BON == 1)
 	{
 		render_map();
 		draw_player(g_p.x, g_p.y, 0x00FFFFFF);

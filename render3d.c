@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 12:36:01 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 17:44:58 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/12 11:29:57 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ unsigned int	shadow(unsigned int color, int col)
 	float			fact;
 	unsigned int	dark;
 
+	if (BON == 0)
+		return (color);
 	col = 0;
 	fact = LGHT / g_col.perp_dist;
 	if (fact > 1)
@@ -49,11 +51,15 @@ int				shade(int i, char x)
 	crouch = g_p.iscrouch ? CROUCH : 0;
 	if (x == 'c')
 	{
+		if (BON == 0)
+			return (rgb_to_int(00, g_prm.cr, g_prm.cg, g_prm.cb));
 		percent = ((float)i + crouch) / (g_prm.h / 2);
 		return (shadedcolor(g_prm.cr, g_prm.cg, g_prm.cb, percent));
 	}
 	else
 	{
+		if (BON == 0)
+			return (rgb_to_int(00, g_prm.fr, g_prm.fg, g_prm.fb));
 		percent = ((float)i + crouch) - (g_prm.h / 2);
 		percent /= (g_prm.h - (g_prm.h / 2));
 		percent = 1 - percent;

@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:31:30 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 18:29:18 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/12 12:21:36 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	get_res(char *line)
 	while (line[i])
 	{
 		i += white_space(&line[i]);
-		ft_isdigit(line[i]) ? (num = ft_atoi(&line[i])) : (g_err.elm_inv = 1);
+		num = res_invalid(i, line);
 		if (num != 0)
 			i += ft_numlen(num, 0) - 1;
 		if (g_prm.w == -1)
@@ -68,17 +68,17 @@ int		prm_count(int num, int cnt, int f)
 {
 	if ((g_prm.fr == -1 || g_prm.cr == -1) && cnt == 0)
 	{
-		f == 'F' ? (g_prm.fr = num) : (g_prm.cr = num);
+		set_color(f, 'r', num);
 		cnt++;
 	}
 	else if ((g_prm.fg == -1 || g_prm.cg == -1) && cnt == 1)
 	{
-		f == 'F' ? (g_prm.fg = num) : (g_prm.cg = num);
+		set_color(f, 'g', num);
 		cnt++;
 	}
 	else if ((g_prm.fb == -1 || g_prm.cb == -1) && cnt == 2)
 	{
-		f == 'F' ? (g_prm.fb = num) : (g_prm.cb = num);
+		set_color(f, 'b', num);
 		cnt++;
 	}
 	else

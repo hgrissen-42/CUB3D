@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:31:30 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/12 12:21:36 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/12 13:01:44 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ void	get_res(char *line)
 	while (line[i])
 	{
 		i += white_space(&line[i]);
+		if (!line[i])
+			break ;
 		num = res_invalid(i, line);
 		if (num != 0)
-			i += ft_numlen(num, 0) - 1;
+			i += skip_digit(&line[i]) - 1;
 		if (g_prm.w == -1)
 			g_prm.w = num;
 		else if (g_prm.h == -1)
@@ -52,7 +54,8 @@ void	get_rgb(char *line, int f)
 		{
 			line[i] == ',' ? i++ : 0;
 			num = ft_atoi(&line[i]);
-			i += ft_numlen(num, 0);
+			//i += ft_numlen(num, 0);
+			i += skip_digit(&line[i]);
 			cnt = prm_count(num, cnt, f);
 		}
 		else

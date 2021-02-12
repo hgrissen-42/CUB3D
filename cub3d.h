@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/12 12:15:36 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/12 12:50:58 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,5 +335,6 @@ void			printmap();
 
 int				res_invalid(int i, char *line);
 void			set_color(char f, char rgb, int num);
+int				skip_digit(char *line);
 
 #endif

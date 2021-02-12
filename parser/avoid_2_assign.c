@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 11:47:26 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/12 12:19:21 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/12 12:50:34 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ int		res_invalid(int i, char *line)
 {
 	int num;
 
-	if (ft_isdigit(line[i]))
+	if (ft_isdigit(line[i]) && ft_isspace(line[1]))
 	{
 		num = ft_atoi(&line[i]);
 		return (num);
 	}
-	g_err.elm_inv = 1;
+	else if (!ft_isspace(line[i]))
+		g_err.elm_inv = 1;
 	return (0);
 }
 
@@ -45,4 +46,14 @@ void	set_color(char f, char rgb, int num)
 		else if (rgb == 'b')
 			g_prm.cb = num;
 	}
+}
+
+int		skip_digit(char *line)
+{
+	int i;
+
+	i = 0;
+	while (ft_isdigit(line[i]))
+		i++;
+	return (i);
 }

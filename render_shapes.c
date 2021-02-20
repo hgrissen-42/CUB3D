@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:46:46 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 17:34:34 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/19 11:54:31 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,17 @@ void	draw_rect(int x, int y, int clr)
 	int j;
 
 	i = x;
-	while (i < x + TILE_SIZE)
+	if (x < 0 || x > g_prm.w || y < 0 || y > g_prm.h)
+		i = x + TILE_SIZE / MINI_MAP;
+	while (i < x + (TILE_SIZE / MINI_MAP))
 	{
 		j = y;
-		while (j < y + TILE_SIZE)
+		while (j < y + (TILE_SIZE / MINI_MAP))
 		{
-			if (i % (x + TILE_SIZE) == 0 || (i + 1)
-			% (x + TILE_SIZE) == 0 || j % (y + TILE_SIZE) == 0
-			|| (j + 1) % (y + TILE_SIZE) == 0)
+			if (i % (x + TILE_SIZE / MINI_MAP) == 0 || (i + 1)
+			% (x + TILE_SIZE / MINI_MAP) == 0
+			|| j % (y + TILE_SIZE / MINI_MAP) == 0
+			|| (j + 1) % (y + TILE_SIZE / MINI_MAP) == 0)
 			{
 				my_mlx_pixel_put(&g_img, i, j, 0x000000);
 			}

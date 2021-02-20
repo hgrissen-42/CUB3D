@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:31:30 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/12 13:01:44 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/16 14:52:50 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	get_res(char *line)
 		num = res_invalid(i, line);
 		if (num != 0)
 			i += skip_digit(&line[i]) - 1;
-		if (g_prm.w == -1)
+		if (g_prm.w == -2)
 			g_prm.w = num;
-		else if (g_prm.h == -1)
+		else if (g_prm.h == -2)
 			g_prm.h = num;
 		else if (g_prm.w && g_prm.h)
 			g_err.num_prm = 1;
@@ -40,24 +40,24 @@ void	get_res(char *line)
 
 void	get_rgb(char *line, int f)
 {
-	int i;
 	int num;
 	int cnt;
 
 	cnt = 0;
-	i = 1;
-	i += white_space(&line[i]);
-	while (line[i])
+	g_i = 1;
+	g_i += white_space(&line[g_i]);
+	while (line[g_i])
 	{
-		if (ft_isdigit(line[i]) || (line[i] == ',' &&
-		ft_isdigit(line[++i]) && cnt > 0))
+		if (ft_isdigit(line[g_i]) || (line[g_i] == ',' &&
+		ft_isdigit(line[++g_i]) && cnt > 0))
 		{
-			line[i] == ',' ? i++ : 0;
-			num = ft_atoi(&line[i]);
-			//i += ft_numlen(num, 0);
-			i += skip_digit(&line[i]);
+			line[g_i] == ',' ? g_i++ : 0;
+			num = ft_atoi(&line[g_i]);
+			g_i += skip_digit(&line[g_i]);
 			cnt = prm_count(num, cnt, f);
 		}
+		else if (cnt == 3 && line[g_i] == ' ')
+			g_i += white_space(&line[g_i]);
 		else
 		{
 			g_err.elm_inv = 1;

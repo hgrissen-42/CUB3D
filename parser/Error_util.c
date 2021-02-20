@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Error_util.c                                       :+:      :+:    :+:   */
+/*   error_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 16:21:19 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 18:23:42 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/13 17:58:56 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		rgb_err(void)
 
 int		res_err(void)
 {
-	if (g_prm.w == -1 || g_prm.h == -1)
+	if (g_prm.w == -2 || g_prm.h == -2)
 		return (1);
 	else
 		return (0);
@@ -41,13 +41,13 @@ int		pat_err(void)
 
 int		res_out(void)
 {
-	if (g_prm.w <= 100 || g_prm.h <= 100)
-		return (1);
-	else if (g_prm.w > 2560 || g_prm.h > 1440)
-	{
+	if (g_prm.w > 2560 || g_prm.w == -1)
 		g_prm.w = 2560;
+	if (g_prm.h > 1440 || g_prm.h == -1)
 		g_prm.h = 1440;
-		return (0);
+	if (g_prm.w < 0 || g_prm.h < 0)
+	{
+		return (1);
 	}
 	return (0);
 }

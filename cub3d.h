@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/12 12:50:58 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/20 15:41:58 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <mlx.h>
 # include <math.h>
 # include "GNL/get_next_line.h"
-# include "LIBFT/libft.h"
+# include "basic/libft.h"
+# include <signal.h>
 
 # define FLT_MAX 3.402823e+38
 
@@ -29,16 +31,19 @@
 # define MINI_MAP 10
 # define TILE_SIZE 64
 # define FOV 1.0472
+# define COL_DIS 10
 
+# define DMG 20
 # define CROUCH 200
 # define LGHT 50
 # define PLAYER_MOVE_SPEED 20
 # define PLAYER_TURN_SPEED 0.1
 
-# define C_EMPTY  0x00344966
-# define C_WALL   0x00F59038
-# define C_SPRITE 0x00FFFFFF
-# define C_RAY 0x00F0F400
+# define C_EMPTY  0x001A3A41
+# define C_WALL 0x00B1C288
+# define C_SPRITE 0x00FBF6A5
+# define C_PLAYER 0x00CC3C2C
+# define C_RAY 0x00FFFFFF
 
 # define A_KEY 0
 # define D_KEY 2
@@ -50,6 +55,17 @@
 # define U_ARR 126
 # define D_ARR 125
 # define SPACE 49
+# define TAB 48
+
+int				g_hmini;
+int				g_wmini;
+
+int				g_post;
+int				g_healthmax;
+int				g_dmg;
+int				g_damageable;
+
+int				g_x;
 
 int				g_is_down;
 int				g_is_up;
@@ -73,6 +89,8 @@ int				g_yc;
 int				g_i;
 int				g_j;
 int				g_tmp;
+
+int				g_pid;
 
 typedef struct	s_prms {
 	int			inc;
@@ -143,6 +161,7 @@ typedef struct	s_player {
 	float		hlfpi;
 	int			iscrouch;
 	int			crouch;
+	int			ismap;
 }				t_player;
 t_player		g_p;
 
@@ -232,7 +251,7 @@ int				g_s_count;
 int				g_save;
 char			*g_file;
 
-void			get_file();
+void			get_file(char *argv[]);
 
 void			prm_init();
 void			err_init(void);
@@ -259,6 +278,7 @@ void			build_map();
 void			spc2wal();
 float			spawn_direction();
 
+void			arguments_errors(int error);
 void			print_errs();
 int				ch_err();
 int				rgb_err();
@@ -296,9 +316,9 @@ int				assign_textures(int i);
 void			ray_norm(int i);
 
 void			draw_sprite(int id);
-void			to_sprite(void);
-void			to_sort(void);
-void			init_sprite(void);
+void			sprites_conf(void);
+void			sprite_sort(void);
+void			init_sprites(void);
 
 void			save_bmp(void);
 void			screenshot();
@@ -316,7 +336,7 @@ int				key_pressed(int keycode);
 int				ft_quit(void);
 
 void			move();
-void			collision();
+void			collision(float newx, float newy);
 void			player_pos();
 
 int				is_corner(int x, int y);
@@ -336,5 +356,17 @@ void			printmap();
 int				res_invalid(int i, char *line);
 void			set_color(char f, char rgb, int num);
 int				skip_digit(char *line);
+int				map_is_last();
 
+void			bonus_events(int keycode, int pr);
+void			wasd_r_events(int keycode);
+void			arrow_r_events(int keycode);
+void			wasd_p_events(int keycode);
+void			arrow_p_events(int keycode);
+
+void			play_m();
+void			play_damage_sfx();
+void			health_bg(void);
+void			health_bar(void);
+void			red_post();
 #endif

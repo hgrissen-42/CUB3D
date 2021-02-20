@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 18:05:07 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 17:33:07 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/19 14:50:50 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if (y >= 0 && y < g_prm.h && x >= 0 && x < g_prm.w)
+	if (x < g_prm.w && x >= 0 && y < g_prm.h && y >= 0)
 	{
 		dst = data->addr + (y * data->ll + x * (data->bpp / 8));
 		*(unsigned int*)dst = color;
@@ -30,20 +30,20 @@ void	render_map(void)
 	int mini_w;
 	int mini_h;
 
-	mini_h = TILE_SIZE / MINI_MAP;
-	mini_w = TILE_SIZE / MINI_MAP;
-	i = 1;
-	while (i < g_prm.nwlcnt + 1)
+	mini_h = (TILE_SIZE) / MINI_MAP;
+	mini_w = (TILE_SIZE) / MINI_MAP;
+	i = 0;
+	while (i < g_prm.nwlcnt + 2)
 	{
-		j = 1;
-		while (j < g_prm.lnglin + 1)
+		j = 0;
+		while (j < g_prm.lnglin + 2)
 		{
 			if (g_prm.map[i][j] == '2')
-				draw_rect(j * mini_w, i * mini_h, C_SPRITE);
+				draw_rect((j * mini_w), (i * mini_h), C_SPRITE);
 			else if (g_prm.map[i][j] == '1')
-				draw_rect(j * mini_w, i * mini_h, C_WALL);
-			else
-				draw_rect(j * mini_w, i * mini_h, C_EMPTY);
+				draw_rect((j * mini_w), (i * mini_h), C_WALL);
+			else if (g_prm.map[i][j] == '0' || is_player(g_prm.map[i][j]))
+				draw_rect((j * mini_w), (i * mini_h), C_EMPTY);
 			j++;
 		}
 		i++;
@@ -52,21 +52,15 @@ void	render_map(void)
 
 void	draw_player(int x, int y, int clr)
 {
-	int xc;
-	int yc;
-	int r;
+	float	xc;
+	float	yc;
 
-	xc = x;
-	yc = y;
-	r = P_RADIUS;
-	xc /= MINI_MAP;
-	yc /= MINI_MAP;
-	draw_ray();
-	while (r >= 0)
-	{
-		circlebres(xc, yc, r, clr);
-		r--;
-	}
+	xc = ((x) / TILE_SIZE);
+	yc = ((y) / TILE_SIZE);
+	xc *= (TILE_SIZE) / MINI_MAP;
+	yc *= (TILE_SIZE) / MINI_MAP;
+	draw_rect(xc, yc, C_PLAYER);
+	clr = 0;
 }
 
 void	draw_ray(void)

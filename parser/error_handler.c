@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:26:20 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 18:08:22 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/14 10:05:23 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ch_fil_err(void)
 	{
 		printf("Error\n");
 		print_errs();
-		printf("al batal !!!\n");
 		exit(0);
 	}
 }
@@ -26,11 +25,11 @@ void	ch_fil_err(void)
 void	print_errs(void)
 {
 	if (g_err.elm_inv)
-		printf("ash zayd fl file ");
+		printf("womething is wrong in the file");
 	else if (res_err() || rgb_err() || pat_err())
-		printf("parameter is missing");
+		printf("parameter is missing or map is not the last element");
 	else if (g_err.num_prm)
-		printf("wash maghadish t9ad number dlparameters ");
+		printf("wrong number of params");
 	else if (g_prm.inc > 8)
 		printf("forbidden double inclusion");
 	else if (g_err.map_inv || g_err.inv_nwl || g_err.map_spc
@@ -40,7 +39,7 @@ void	print_errs(void)
 	else
 	{
 		if (res_out() && !g_err.num_prm && !g_err.elm_inv)
-			printf("resolution 3andk mahiyash\n");
+			printf("resolution is wrong\n");
 		else if (rgb_out())
 			printf("color out of range");
 	}
@@ -60,19 +59,19 @@ int		ch_err(void)
 
 void	map_err(void)
 {
-	if (!g_err.map_bgn)
-		printf("map is missing\n");
-	else if (g_err.map_inv)
-		printf("lghalat a3shiri\n");
-	else if (g_err.inv_nwl)
+	if (!g_err.map_bgn && g_prm.inc == 8)
+		printf("map is missing or is not the last param\n");
+	else if (g_err.map_inv && g_prm.inc == 8)
+		printf("invalid map\n");
+	else if (g_err.inv_nwl && g_prm.inc == 8)
 		printf("newline in the map\n");
-	else if (g_err.plr_cnt > 1)
+	else if (g_err.plr_cnt > 1 && g_prm.inc == 8)
 		printf("multiple players\n");
-	else if (g_err.plr_cnt < 1)
+	else if (g_err.plr_cnt < 1 && g_prm.inc == 8)
 		printf("lplayer is missing\n");
-	else if (g_err.map_spc)
+	else if (g_err.map_spc && g_prm.inc == 8)
 		printf("line only a space\n");
-	else if (g_err.map_open)
+	else if (g_err.map_open && g_prm.inc == 8)
 		printf("map is open\n");
 }
 

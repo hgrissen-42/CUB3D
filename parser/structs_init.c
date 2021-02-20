@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:24:52 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 18:47:12 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/12 16:30:15 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	prm_init(void)
 {
 	g_prm.inc = 0;
-	g_prm.w = -1;
-	g_prm.h = -1;
+	g_prm.w = -2;
+	g_prm.h = -2;
 	g_prm.fr = -1;
 	g_prm.fg = -1;
 	g_prm.fb = -1;

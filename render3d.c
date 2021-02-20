@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 12:36:01 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/12 11:29:57 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/15 16:00:19 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ int				shade(int i, char x)
 	{
 		if (BON == 0)
 			return (rgb_to_int(00, g_prm.cr, g_prm.cg, g_prm.cb));
-		percent = ((float)i + crouch) / (g_prm.h / 2);
+		percent = ((float)i + g_p.crouch) / (g_prm.h / 2);
 		return (shadedcolor(g_prm.cr, g_prm.cg, g_prm.cb, percent));
 	}
 	else
 	{
 		if (BON == 0)
 			return (rgb_to_int(00, g_prm.fr, g_prm.fg, g_prm.fb));
-		percent = ((float)i + crouch) - (g_prm.h / 2);
+		percent = ((float)i + g_p.crouch) - (g_prm.h / 2);
 		percent /= (g_prm.h - (g_prm.h / 2));
 		percent = 1 - percent;
 		return (shadedcolor(g_prm.fr, g_prm.fg, g_prm.fb, percent));
@@ -75,7 +75,7 @@ void			render_flr_cei(void)
 	int cc;
 	int crouch;
 
-	crouch = g_p.iscrouch ? CROUCH * 2 : 0;
+	crouch = g_p.crouch * 2;
 	i = -1;
 	while (++i < g_prm.h)
 	{

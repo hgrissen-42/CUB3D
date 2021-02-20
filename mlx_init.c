@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 16:10:47 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 16:17:50 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/15 18:09:20 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 void	canvas_init(void)
 {
 	g_s_count = 0;
+	g_hmini = g_prm.h / MINI_MAP;
+	g_wmini = g_prm.w / MINI_MAP;
+	g_x = 1;
 	g_mlx.mlx = mlx_init();
 	g_mlx.mlx_win = mlx_new_window(g_mlx.mlx, g_prm.w, g_prm.h, "CUB3D");
 	g_img.img = mlx_new_image(g_mlx.mlx, g_prm.w, g_prm.h);
@@ -25,6 +28,10 @@ void	canvas_init(void)
 
 void	player_init(void)
 {
+	g_post = 0;
+	g_damageable = 1;
+	g_dmg = 0;
+	g_healthmax = g_prm.w - (g_prm.w / 4) - 2 - ((g_prm.w / 4) + 2);
 	player_pos();
 	g_p.iscrouch = 0;
 	g_p.crouch = 0;
@@ -35,6 +42,7 @@ void	player_init(void)
 	g_p.movespeed = PLAYER_MOVE_SPEED;
 	g_p.turnspeed = PLAYER_TURN_SPEED;
 	g_p.hlfpi = 0;
+	g_p.ismap = 0;
 }
 
 void	player_pos(void)

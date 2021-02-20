@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 15:16:08 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 16:22:17 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/16 11:57:08 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int		ft_quit(void)
 {
+	if (BON)
+		kill(g_pid, 1);
 	exit(0);
 	return (0);
 }

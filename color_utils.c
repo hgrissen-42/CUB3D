@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 16:19:12 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 15:02:47 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/20 15:24:47 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ float	clamp_clr(float clr)
 	return (clr);
 }
 
-int		get_r(int trgb)
+int		get_r(int clr)
 {
-	return (trgb & (0xFF << 16));
+	return (clr & (0xFF << 16));
 }
 
-int		get_g(int trgb)
+int		get_g(int clr)
 {
-	return (trgb & (0xFF << 8));
+	return (clr & (0xFF << 8));
 }
 
-int		get_b(int trgb)
+int		get_b(int clr)
 {
-	return (trgb & 0xFF);
+	return (clr & 0xFF);
 }
 
 int		rgb_to_int(int t, int r, int g, int b)

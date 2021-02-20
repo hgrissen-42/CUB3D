@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:08:43 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 17:47:32 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/14 16:49:27 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		walls3d(void)
 		while (y < g_col.wallbot)
 		{
 			g_col.dist = y + (g_col.strip_h / 2) - (g_prm.h / 2);
-			g_col.dist += g_p.iscrouch ? CROUCH : 0;
+			g_col.dist += g_p.crouch;
 			g_col.yoff = (int)(g_col.dist * ((float)TILE_SIZE / g_col.strip_h));
 			my_mlx_pixel_put(&g_img, i, y, assign_textures(i));
 			y++;
@@ -42,10 +42,10 @@ void		ray_norm(int i)
 	g_col.projwallh = (TILE_SIZE / g_col.perp_dist) * g_col.distproj;
 	g_col.strip_h = (int)g_col.projwallh;
 	g_col.walltop = (g_prm.h / 2) - (g_col.strip_h / 2);
-	g_col.walltop -= g_p.iscrouch ? CROUCH : 0;
+	g_col.walltop -= g_p.crouch;
 	g_col.walltop = g_col.walltop < 0 ? 0 : g_col.walltop;
 	g_col.wallbot = (g_prm.h / 2) + (g_col.strip_h / 2);
-	g_col.wallbot -= g_p.iscrouch ? CROUCH : 0;
+	g_col.wallbot -= g_p.crouch;
 	g_col.wallbot = (g_col.wallbot > g_prm.h) ? g_prm.h : g_col.wallbot;
 	if (g_rays[i].hit_v)
 		g_col.xoff = (int)g_rays[i].hity % TILE_SIZE;
@@ -79,7 +79,7 @@ void		init_textures(void)
 	int		h;
 
 	if (!(g_no.img))
-		if (!(g_no.img = mlx_xpm_file_to_image(g_mlx.mlx, g_prm.no, &w, &h)))
+		if (!(g_no.img = mlx_xpm_file_to_image(g_mlx.mlx, g_prm.ea, &w, &h)))
 			texture_error(1);
 	if (!(g_no.addr))
 		g_no.addr = mlx_get_data_addr(g_no.img, &g_no.bpp, &g_no.ll, &g_no.end);
@@ -94,7 +94,7 @@ void		init_textures(void)
 	if (!(g_we.addr))
 		g_we.addr = mlx_get_data_addr(g_we.img, &g_we.bpp, &g_we.ll, &g_we.end);
 	if (!(g_ea.img))
-		if (!(g_ea.img = mlx_xpm_file_to_image(g_mlx.mlx, g_prm.ea, &w, &h)))
+		if (!(g_ea.img = mlx_xpm_file_to_image(g_mlx.mlx, g_prm.no, &w, &h)))
 			texture_error(4);
 	if (!(g_ea.addr))
 		g_ea.addr = mlx_get_data_addr(g_ea.img, &g_ea.bpp, &g_ea.ll, &g_ea.end);

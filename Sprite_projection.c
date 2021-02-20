@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Sprite_projection.c                                :+:      :+:    :+:   */
+/*   sprite_projection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 11:36:38 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 19:09:15 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/20 15:41:58 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_sprite(void)
+void	init_sprites(void)
 {
 	int i;
 	int j;
@@ -40,7 +40,7 @@ void	init_sprite(void)
 	}
 }
 
-void	to_sort(void)
+void	sprite_sort(void)
 {
 	int				i;
 	int				j;
@@ -64,13 +64,13 @@ void	to_sort(void)
 	}
 }
 
-void	to_sprite(void)
+void	sprites_conf(void)
 {
 	float	angle;
 	int		k;
 
 	k = -1;
-	to_sort();
+	sprite_sort();
 	angle = 0;
 	while (++k < g_s_count)
 	{
@@ -87,6 +87,28 @@ void	to_sprite(void)
 		/ TILE_SIZE + ((g_prm.w / 2) - (int)g_sp[k].size / 2));
 		draw_sprite(k);
 	}
+}
+
+unsigned int	s_shadow(unsigned int color, int id)
+{
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+	float			fact;
+	unsigned int	dark;
+
+	if (BON == 0)
+		return (color);
+	fact = LGHT * 2 / g_sp[id].dist;
+	if (fact > 1)
+		return (color);
+	r = (((color >> 16) & 0xFF)) * fact;
+	g = (((color >> 8) & 0xFF)) * fact;
+	b = ((color) & (0xFF)) * fact;
+	dark = rgb_to_int(0, r, g, b);
+	if (dark > color)
+		dark = color;
+	return (dark);
 }
 
 void	draw_sprite(int id)
@@ -106,13 +128,14 @@ void	draw_sprite(int id)
 			continue ;
 		while (++j < g_sz - 1)
 		{
-			if (g_sp[id].yof + j <= 0 || g_sp[id].yof + j > g_prm.h - 1)
+			if (g_sp[id].yof + j <= (g_p.crouch)
+			|| g_sp[id].yof + j > g_prm.h + (g_p.crouch) - 1)
 				continue ;
 			c = g_spad[(int)((TILE_SIZE) * (TILE_SIZE * j / (int)g_sz)
 			+ (TILE_SIZE * i / (int)g_sz))];
 			if (c != g_spad[0])
 				my_mlx_pixel_put(&g_img, i + g_sp[id].xof, j + g_sp[id].yof
-				- (g_p.iscrouch * CROUCH), c);
+				- g_p.crouch, s_shadow(c, id));
 		}
 	}
 }

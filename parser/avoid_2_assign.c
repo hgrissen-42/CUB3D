@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 11:47:26 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/12 12:50:34 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/14 16:45:04 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,14 @@ int		skip_digit(char *line)
 	while (ft_isdigit(line[i]))
 		i++;
 	return (i);
+}
+
+int		map_is_last(void)
+{
+	if (g_prm.cr && g_prm.cg && g_prm.cb && g_prm.fr
+	&& g_prm.fg && g_prm.fb && g_prm.w > -1 && g_prm.h > 1
+	&& g_prm.no && g_prm.so && g_prm.ea && g_prm.we && g_prm.s)
+		return (1);
+	else
+		return (0);
 }

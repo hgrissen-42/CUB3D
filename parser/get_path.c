@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 12:40:51 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 18:32:24 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/12 14:40:04 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,21 @@ void	routing(char *line)
 	int c;
 
 	c = line[0];
-	if (line[0] == 'N' && line[1] == 'O')
+	if (line[0] == 'N' && line[1] == 'O' && ft_isspace(line[2]))
 		get_path(++line, c);
-	else if (line[0] == 'W' && line[1] == 'E')
+	else if (line[0] == 'W' && line[1] == 'E' && ft_isspace(line[2]))
 		get_path(++line, c);
-	else if (line[0] == 'E' && line[1] == 'A')
+	else if (line[0] == 'E' && line[1] == 'A' && ft_isspace(line[2]))
 		get_path(++line, c);
 	else if (line[0] == 'S')
-		line[1] == 'O' ? get_path(++line, 'O') : get_path(line, 'S');
+	{
+		if (line[1] == 'O' && ft_isspace(line[2]))
+			get_path(++line, 'O');
+		else if (ft_isspace(line[1]))
+			get_path(line, 'S');
+		else
+			g_err.elm_inv = 1;
+	}
 	else
 		g_err.elm_inv = 1;
 }

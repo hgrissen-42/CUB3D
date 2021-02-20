@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 11:57:14 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/12 10:12:55 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/02/20 15:25:51 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,21 @@ int		main(int argc, char **argv)
 	if (argc <= 1)
 	{
 		printf("Error\n .cub file missing");
-		exit(0);
+		ft_quit();
 	}
 	prm_init();
 	err_init();
 	arguments(argc, argv);
-	get_file();
+	get_file(argv);
 	if (g_err.map_bgn)
 	{
 		build_map();
 		map_chk_opn();
 	}
 	ch_fil_err();
+	play_m();
 	canvas_init();
-	init_sprite();
+	init_sprites();
 	mlx_loop_hook(g_mlx.mlx, update, &g_mlx);
 	mlx_loop(g_mlx.mlx);
 	return (0);

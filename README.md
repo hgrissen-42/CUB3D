@@ -3,6 +3,6 @@
 Project state : FINISHED
 
 
-<iframe class="imgur-embed" width="100%" height="1978" frameborder="0" src="https://i.imgur.com/a5ZPIZZ.gifv#embed"></iframe>
+![alt-text](https://github.com/haitamgrissen/42CUB3D/blob/main/resources/going_backward.gif)
 
 # FIBONACCI

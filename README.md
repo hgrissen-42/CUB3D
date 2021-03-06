@@ -3,9 +3,9 @@
 ## Project state : FINISHED
 
 
-![alt-text](https://github.com/haitamgrissen/42CUB3D/blob/main/resources/going_forward.gif)
+![alt-text]()
 
-
+<img src="https://github.com/haitamgrissen/42CUB3D/blob/main/resources/going_forward.gif" width="500" height="500"/>
 
 
 

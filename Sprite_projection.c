@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_projection.c                                :+:      :+:    :+:   */
+/*   Sprite_projection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 11:36:38 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/20 15:41:58 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/03/06 15:23:26 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	sprites_conf(void)
 		g_sp[k].size = (float)((g_prm.w / g_sp[k].dist) * TILE_SIZE);
 		g_sp[k].yof = (float)(g_prm.h / 2 - g_sp[k].size / 2);
 		g_sp[k].xof = (float)(((deg(angle) - deg(g_p.rotang)) * g_prm.w)
-		/ TILE_SIZE + ((g_prm.w / 2) - (int)g_sp[k].size / 2));
+		/ (TILE_SIZE - (TILE_SIZE / 2))  + ((g_prm.w / 2) - (int)g_sp[k].size / 2));
 		draw_sprite(k);
 	}
 }

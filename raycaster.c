@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:52:49 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/11 16:25:57 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/03/06 17:15:03 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	vert_ray(float angle)
 	g_r.ystep *= (g_is_down && g_r.ystep < 0) ? -1 : 1;
 	g_r.nvx = g_r.x_intercept;
 	g_r.nvy = g_r.y_intercept;
-	while (g_r.nvx >= 0 && g_r.nvx <= g_prm.lnglin * 64 &&
-			g_r.nvy >= 0 && g_r.nvy <= g_prm.nwlcnt * 64)
+	while (g_r.nvx >= 0 && g_r.nvx <= g_prm.lnglin * TILE_SIZE &&
+			g_r.nvy >= 0 && g_r.nvy <= g_prm.nwlcnt * TILE_SIZE)
 	{
 		g_r.xcheck = g_r.nvx + (g_is_left ? -1 : 0);
 		g_r.ycheck = g_r.nvy;
@@ -50,8 +50,8 @@ void	horz_ray(float angle)
 	g_r.xstep *= (g_is_right && g_r.xstep < 0) ? -1 : 1;
 	g_r.nhx = g_r.x_intercept;
 	g_r.nhy = g_r.y_intercept;
-	while (g_r.nhx >= 0 && g_r.nhx <= g_prm.lnglin * 64 &&
-		g_r.nhy >= 0 && g_r.nhy <= g_prm.nwlcnt * 64)
+	while (g_r.nhx >= 0 && g_r.nhx <= g_prm.lnglin * TILE_SIZE &&
+		g_r.nhy >= 0 && g_r.nhy <= g_prm.nwlcnt * TILE_SIZE)
 	{
 		g_r.xcheck = g_r.nhx;
 		g_r.ycheck = g_r.nhy + (g_is_up ? -1 : 0);

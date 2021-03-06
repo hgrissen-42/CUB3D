@@ -6,7 +6,7 @@
 /*   By: hgrissen <hgrissen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:19:33 by hgrissen          #+#    #+#             */
-/*   Updated: 2021/02/20 15:41:58 by hgrissen         ###   ########.fr       */
+/*   Updated: 2021/03/06 17:16:28 by hgrissen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@
 # define FLT_MAX 3.402823e+38
 
 # define P_RADIUS 1
-# define MINI_MAP 10
-# define TILE_SIZE 64
+# define MINI_MAP 12
+# define TILE_SIZE 128
 # define FOV 1.0472
 # define COL_DIS 10
 
 # define DMG 20
 # define CROUCH 200
-# define LGHT 50
+# define LGHT 200
 # define PLAYER_MOVE_SPEED 20
-# define PLAYER_TURN_SPEED 0.1
+# define PLAYER_TURN_SPEED 0.05
 
-# define C_EMPTY  0x001A3A41
-# define C_WALL 0x00B1C288
-# define C_SPRITE 0x00FBF6A5
-# define C_PLAYER 0x00CC3C2C
+# define C_EMPTY  0x001B112C
+# define C_WALL 0x00721F7A
+# define C_SPRITE 0x00B63F82
+# define C_PLAYER 0x006EBDEA
 # define C_RAY 0x00FFFFFF
 
 # define A_KEY 0
